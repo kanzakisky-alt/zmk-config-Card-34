@@ -46,7 +46,7 @@
         canaria_layer {
             bindings = <
     &kp Q       &kp W       &kp D       &kp G       &kp F         &kp J       &kp L       &kp Y       &kp K       &kp MINUS
-    &hm LGUI A  &hm LALT S  &hm LCTRL E &hm LSHFT R &hm LTAB T    &hm R_TAB H &hm RSHFT U &hm RCTRL I &hm LALT O  &hm RGUI P
+    &hm LGUI A  &hm LALT S  &hm LCTRL E &hm LSHFT R &hm LTAB T    &hm TAB H &hm RSHFT U &hm RCTRL I &hm LALT O  &hm RGUI P
     &kp Z       &kp X       &kp C       &kp V       &kp B         &kp N       &kp M       &kp COMMA   &kp DOT     &kp FSLH
                          &lt_th FUC GRAVE &lt_th NUM RET         &lt_th NAV SPACE &lt_th MOS BSPC
             >;
@@ -55,7 +55,7 @@
         num_layer {
             bindings = <
     &kp TILDE   &kp LBKT    &kp RBKT    &kp FSLH    &kp PIPE      &kp ASTRK   &kp N7      &kp N8      &kp N9      &kp PLUS
-    &hm LGUI BSLH &hm LALT LBRC &hm LCTRL RBRC &hm LSHFT LSHFT &hm LTAB TAB &hm R_TAB MINUS &hm RSHFT N4 &hm RCTRL N5 &hm LALT N6 &hm RGUI N0
+    &hm LGUI BSLH &hm LALT LBRC &hm LCTRL RBRC &hm LSHFT LSHFT &hm LTAB TAB &hm TAB MINUS &hm RSHFT N4 &hm RCTRL N5 &hm LALT N6 &hm RGUI N0
     &kp UNDER   &kp AMPS    &kp LT      &kp GT      &kp BSLH      &kp DOT     &kp N1      &kp N2      &kp N3      &kp SEMI
                                         &trans      &trans        &trans      &trans
             >;
