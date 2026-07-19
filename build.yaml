@@ -20,4 +20,6 @@
 ---
 include:
   - board: seeeduino_xiao_ble
-    shield: card34
+    shield: card34_left
+  - board: seeeduino_xiao_ble
+    shield: card34_right
