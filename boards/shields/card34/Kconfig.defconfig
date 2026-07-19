@@ -1,0 +1,6 @@
+if SHIELD_CARD34
+
+config ZMK_KEYBOARD_NAME
+    default "Card-34"
+
+endif
