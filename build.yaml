@@ -20,6 +20,6 @@
 ---
 include:
   - board: seeeduino_xiao_ble
-    shield: card34_left
+    conf: config/seeeduino_xiao_ble_left.conf
   - board: seeeduino_xiao_ble
-    shield: card34_right
+    conf: config/seeeduino_xiao_ble_right.conf
