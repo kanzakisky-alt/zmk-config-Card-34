@@ -26,3 +26,6 @@ include:
   - board: seeeduino_xiao_ble
     conf: config/seeeduino_xiao_ble_right.conf
     artifact-name: seeeduino_xiao_ble_right
+  - board: seeeduino_xiao_ble
+    shield: settings_reset
+    artifact-name: settings_reset
