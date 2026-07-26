@@ -21,5 +21,8 @@
 include:
   - board: seeeduino_xiao_ble
     conf: config/seeeduino_xiao_ble_left.conf
+    cmake-args: -DCONFIG_ZMK_KEYBOARD_NAME=\"Card\ 34\"
+    artifact-name: seeeduino_xiao_ble_left
   - board: seeeduino_xiao_ble
     conf: config/seeeduino_xiao_ble_right.conf
+    artifact-name: seeeduino_xiao_ble_right
