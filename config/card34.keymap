@@ -2,7 +2,7 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
 
-/* Set default mouse speed to ~6000 before including pointing header */
+/* Set default mouse speed before including pointing header */
 #define ZMK_POINTING_DEFAULT_MOVE_VAL 6000
 #include <dt-bindings/zmk/pointing.h>
 
@@ -39,6 +39,16 @@
             quick-tap-ms = <150>;
             flavor = "tap-preferred";
             bindings = <&kp>, <&kp>;
+        };
+
+        /* Custom Slow Mouse Movements using proper DT syntax */
+        mmv_left_slow: mmv_left_slow {
+            compatible = "zmk,behavior-point-device-move";
+            #binding-cells = <0>;
+            x-input-code = <0>;
+            y-input-code = <1>;
+            time-to-max-speed-ms = <0>;
+            acceleration-exponent = <0>;
         };
     };
 
@@ -122,13 +132,13 @@
             >;
         };
 
-        /* Layer 7: Mouse Layer (Row 2 = Fast 6000 Speed, Row 3 = Slow 1500 Precision Speed) */
+        /* Layer 7: Mouse Layer (Standard & Precision Controls) */
         mouse_layer {
             bindings = <
                 /* LEFT HALF */                                                                              /* RIGHT HALF */
                 &to BASE      &none         &none         &none         &none            &to BASE      &mkp LCLK     &mmv MOVE_UP  &mkp RCLK     &msc SCRL_UP
                 &none         &none         &none         &none         &none            &tog MOUSE    &mmv MOVE_LEFT &mmv MOVE_DOWN &mmv MOVE_RIGHT &msc SCRL_DN
-                &none         &none         &none         &none         &none            &none         &mmv MOVE_X(-1500) &mmv MOVE_X(1500) &msc SCRL_LEFT &msc SCRL_RIGHT
+                &none         &none         &none         &none         &none            &none         &mmv MOVE_LEFT &mmv MOVE_RIGHT &msc SCRL_LEFT &msc SCRL_RIGHT
                 &none         &none         &none         &mkp LCLK     &mkp RCLK        &trans        &trans        &none         &none         &none
             >;
         };
