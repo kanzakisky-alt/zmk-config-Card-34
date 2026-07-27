@@ -1,9 +1,6 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
-
-/* Set default mouse speed before including pointing header */
-#define ZMK_POINTING_DEFAULT_MOVE_VAL 6000
 #include <dt-bindings/zmk/pointing.h>
 
 // Layer Index Definitions
@@ -41,14 +38,34 @@
             bindings = <&kp>, <&kp>;
         };
 
-        /* Custom Slow Mouse Movements using proper DT syntax */
-        mmv_left_slow: mmv_left_slow {
+        /* Slow Precision Mouse Movement Behaviors (1500 speed) */
+        mmv_slow_up: mmv_slow_up {
             compatible = "zmk,behavior-point-device-move";
             #binding-cells = <0>;
             x-input-code = <0>;
             y-input-code = <1>;
-            time-to-max-speed-ms = <0>;
-            acceleration-exponent = <0>;
+            y-value = <(-1500)>;
+        };
+        mmv_slow_down: mmv_slow_down {
+            compatible = "zmk,behavior-point-device-move";
+            #binding-cells = <0>;
+            x-input-code = <0>;
+            y-input-code = <1>;
+            y-value = <1500>;
+        };
+        mmv_slow_left: mmv_slow_left {
+            compatible = "zmk,behavior-point-device-move";
+            #binding-cells = <0>;
+            x-input-code = <0>;
+            y-input-code = <1>;
+            x-value = <(-1500)>;
+        };
+        mmv_slow_right: mmv_slow_right {
+            compatible = "zmk,behavior-point-device-move";
+            #binding-cells = <0>;
+            x-input-code = <0>;
+            y-input-code = <1>;
+            x-value = <1500>;
         };
     };
 
@@ -132,13 +149,13 @@
             >;
         };
 
-        /* Layer 7: Mouse Layer (Standard & Precision Controls) */
+        /* Layer 7: Mouse Layer (Standard & Precision Slow Controls) */
         mouse_layer {
             bindings = <
                 /* LEFT HALF */                                                                              /* RIGHT HALF */
                 &to BASE      &none         &none         &none         &none            &to BASE      &mkp LCLK     &mmv MOVE_UP  &mkp RCLK     &msc SCRL_UP
                 &none         &none         &none         &none         &none            &tog MOUSE    &mmv MOVE_LEFT &mmv MOVE_DOWN &mmv MOVE_RIGHT &msc SCRL_DN
-                &none         &none         &none         &none         &none            &none         &mmv MOVE_LEFT &mmv MOVE_RIGHT &msc SCRL_LEFT &msc SCRL_RIGHT
+                &none         &none         &none         &none         &none            &none         &mmv_slow_left &mmv_slow_right &msc SCRL_LEFT &msc SCRL_RIGHT
                 &none         &none         &none         &mkp LCLK     &mkp RCLK        &trans        &trans        &none         &none         &none
             >;
         };
