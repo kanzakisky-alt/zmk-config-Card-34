@@ -17,10 +17,10 @@
             <&xiao_d 7  (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>; /* row 3 */
 
         col-gpios =
-            <&xiao_d 0 GPIO_ACTIVE_HIGH>, /* col 1: Q A Z */
-            <&xiao_d 1 GPIO_ACTIVE_HIGH>, /* col 2: W S X */
-            <&xiao_d 2 GPIO_ACTIVE_HIGH>, /* col 3: E D C */
-            <&xiao_d 3 GPIO_ACTIVE_HIGH>, /* col 4: R F V */
-            <&xiao_d 4 GPIO_ACTIVE_HIGH>; /* col 5: T G B */
+            <&xiao_d 1 GPIO_ACTIVE_HIGH>, /* col 1: Q A Z */
+            <&xiao_d 2 GPIO_ACTIVE_HIGH>, /* col 2: W S X */
+            <&xiao_d 3 GPIO_ACTIVE_HIGH>, /* col 3: E D C */
+            <&xiao_d 4 GPIO_ACTIVE_HIGH>, /* col 4: R F V */
+            <&xiao_d 5 GPIO_ACTIVE_HIGH>; /* col 5: T G B */
     };
 };
