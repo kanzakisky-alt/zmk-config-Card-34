@@ -21,6 +21,6 @@
             <&xiao_d 1 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>, /* col 2: W S X */
             <&xiao_d 2 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>, /* col 3: E D C */
             <&xiao_d 3 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>, /* col 4: R F V */
-            <&xiao_d 5 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>; /* col 5: T G B (D5 / Pin 6) */
+            <&xiao_d 5 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>; /* col 5: T G B */
     };
 };
