@@ -15,18 +15,18 @@
 #define FUTURE1 8
 #define FUTURE2 9
 
+/* Overriding Mouse Driver Defaults */
+&mmv {
+    time-to-max-speed-ms = <300>;    /* Fast ramp-up */
+    acceleration-exponent = <1>;     /* Smooth linear curve */
+};
+
+&msc {
+    time-to-max-speed-ms = <100>;    /* Snappy scroll speed */
+    acceleration-exponent = <1>;
+};
+
 / {
-    /* Fast Default Mouse Movement Configuration (~6000 top speed) */
-    &mmv {
-        time-to-max-speed-ms = <300>;    /* Fast ramp-up */
-        acceleration-exponent = <1>;     /* Smooth linear curve */
-    };
-
-    &msc {
-        time-to-max-speed-ms = <100>;    /* Snappy scroll speed */
-        acceleration-exponent = <1>;
-    };
-
     behaviors {
         /* Home Row Mods (Matching Kanata $t-hrm = 300ms) */
         hm: home_row_mod {
