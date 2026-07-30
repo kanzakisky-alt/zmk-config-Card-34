@@ -1,11 +1,26 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/mouse.h>
+#include <behaviors/mouse_keys.dtsi>
 
 // Layer Index Definitions
 #define COLEMAK 0
 #define NUM 1
 #define NAV 2
 #define FUNC 3
+
+
+/* Mouse & Scroll Speed Adjustments */
+&msc {
+    time-to-max-speed-ms = <100>;
+    acceleration-exponent = <1>;
+};
+
+&mmv {
+    time-to-max-speed-ms = <150>;
+    acceleration-exponent = <1>;
+};
+
 
 / {
     behaviors {
@@ -61,12 +76,14 @@
             >;
         };
 
+        /* Layer 2: Custom Navigation & Mouse Layer */
         nav_layer {
             bindings = <
-                &none &none &none &none &none    &none &none &none &none &none
-                &none &none &none &none &none    &none &none &none &none &none
-                &none &none &none &none &none    &none &none &none &none &none
-                &none &none &none &trans &trans  &trans &trans &none &none &none
+                /* LEFT HALF */                                                                                 /* RIGHT HALF */
+                &kp ESC      &kp HOME    &kp UP      &kp END     &kp SPACE        &kp LC(C)    &mkp LCLK      &mmv MOVE_UP   &mkp RCLK      &msc SCRL_UP
+                &kp LCTRL    &kp RIGHT   &kp DOWN    &kp LEFT    &kp BSPC         &kp LC(V)    &mmv MOVE_LEFT &mmv MOVE_DOWN &mmv MOVE_RIGHT &msc SCRL_DOWN
+                &kp LHMETA   &kp LALT    &kp LCTRL   &kp LSHFT   &kp TAB          &tog NAV     &kp LC(PLUS)   &kp LC(MINUS)  &msc SCRL_LEFT &msc SCRL_RIGHT
+                &none        &none       &none       &kp LCTRL   &kp LSHFT        &mkp LCLK    &mkp RCLK      &none          &none          &none
             >;
         };
 
