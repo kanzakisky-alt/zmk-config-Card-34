@@ -1,7 +1,6 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/mouse.h>
-#include <dt-bindings/zmk/input_transform.h>
 #include <behaviors/mouse_keys.dtsi>
 
 // Layer Index Definitions
@@ -14,20 +13,15 @@
 #define GAME    6
 #define GAMENUM 7
 
-/* Mouse & Scroll Speed Adjustments */
+/* Standard ZMK Mouse & Scroll Speed Adjustments */
 &msc {
     time-to-max-speed-ms = <100>;
     acceleration-exponent = <1>;
 };
 
 &mmv {
-    time-to-max-speed-ms = <300>;   /* Longer ramp gives you precise control on quick taps */
-    acceleration-exponent = <2>;     /* Exponential curve: starts slow, accelerates fast */
-};
-
-/* 3x Velocity Scaler for High-Res Displays */
-&mmv_input_listener {
-    input-processors = <&zip_xy_scaler 3 1>; /* Multiplies movement output by 3x */
+    time-to-max-speed-ms = <150>;   /* Ramps up to full speed quickly on hold */
+    acceleration-exponent = <1>;     /* Linear acceleration for predictable distance */
 };
 
 / {
@@ -36,7 +30,7 @@
         macro_sleep: macro_sleep {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            wait-ms = <400>;
+            wait-ms = <300>;
             tap-ms = <30>;
             bindings
                 = <&kp LG(X)>
