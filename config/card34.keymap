@@ -26,6 +26,19 @@
 
 / {
     behaviors {
+        /* Macro: Windows Sleep Sequence (Win+X -> U -> S) */
+        macro_sleep: macro_sleep {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <100>;
+            tap-ms = <30>;
+            bindings
+                = <&kp LG(X)>
+                , <&kp U>
+                , <&kp S>
+                ;
+        };
+
         /* Home Row Mods (Hold = Modifier, Tap = Key) */
         hm: home_row_mod {
             compatible = "zmk,behavior-hold-tap";
@@ -59,7 +72,7 @@
         /* Layer 0: Colemak-DH Base Layer */
         colemak_layer {
             bindings = <
-                /* LEFT HALF */                                                                                 /* RIGHT HALF */
+                /* LEFT HALF */                                                 /* RIGHT HALF */
                 &q_tab_esc    &kp W         &kp F         &kp P         &kp B            &kp J         &kp L         &kp U         &kp Y         &kp MINUS
                 &hm LMETA A   &hm LALT S    &hm LCTRL R   &hm LSHFT T   &kp G            &kp M         &hm RSHFT N   &hm RCTRL E   &hm RALT I    &hm RMETA O
                 &kp Z         &kp X         &kp C         &kp D         &kp V            &kp K         &kp H         &kp COMMA     &kp DOT       &kp FSLH
@@ -70,7 +83,7 @@
         /* Layer 1: Symbol / Number Pad Layer */
         num_layer {
             bindings = <
-                /* LEFT HALF */                                                                                 /* RIGHT HALF */
+                /* LEFT HALF */                                                 /* RIGHT HALF */
                 &kp AT        &kp GRAVE     &kp CARET     &kp TILDE     &kp BSLH         &kp PIPE      &kp COLON     &kp LBKT      &kp RBKT      &kp PLUS
                 &hm LMETA N1  &hm LALT N2   &hm LCTRL N3  &hm LSHFT N4  &kp N5           &kp N6        &hm RSHFT N7  &hm RCTRL N8  &hm RALT N9   &hm RMETA N0
                 &kp FSLH      &kp ASTRK     &kp PLUS      &kp MINUS     &kp EQUAL        &kp DOT       &kp UNDER     &kp LBRC      &kp RBRC      &kp SEMI
@@ -81,7 +94,7 @@
         /* Layer 2: Custom Navigation & Mouse Layer */
         nav_layer {
             bindings = <
-                /* LEFT HALF */                                                                                 /* RIGHT HALF */
+                /* LEFT HALF */                                                 /* RIGHT HALF */
                 &kp ESC       &kp HOME      &kp UP        &kp END       &kp SPACE        &kp LC(C)     &mkp LCLK     &mmv MOVE_UP  &mkp RCLK     &msc SCRL_UP
                 &kp LCTRL     &kp RIGHT     &kp DOWN      &kp LEFT      &kp BSPC         &kp LC(V)     &mmv MOVE_LEFT &mmv MOVE_DOWN &mmv MOVE_RIGHT &msc SCRL_DOWN
                 &kp LMETA     &kp LALT      &kp LCTRL     &kp LSHFT     &kp TAB          &tog NAV      &kp LC(EQUAL) &kp LC(MINUS) &msc SCRL_LEFT &msc SCRL_RIGHT
@@ -92,31 +105,35 @@
         /* Layer 3: Function & System Layer */
         func_layer {
             bindings = <
-                &to QWERTY    &none         &none         &none         &none            &none         &none         &none         &none         &none
+                /* LEFT HALF */                                                 /* RIGHT HALF */
+                &macro_sleep  &none         &none         &none         &none            &none         &none         &none         &none         &none
                 &none         &none         &none         &none         &none            &none         &none         &none         &none         &none
-                &none         &none         &none         &none         &none            &none         &none         &none         &none         &none
+                &to QWERTY    &to KANATA    &to COLEMAK   &to GAME      &none            &none         &none         &none         &none         &none
                 &none         &none         &none         &trans        &trans           &trans        &trans        &none         &none         &none
             >;
         };
-        /* Layer 4: qwerty layer */
+
+        /* Layer 4: QWERTY Layer */
         qwerty_layer {
             bindings = <
                 &kp Q         &kp W         &kp E         &kp R         &kp T            &kp Y         &kp U         &kp I         &kp O         &kp P
                 &kp A         &kp S         &kp D         &kp F         &kp G            &kp H         &kp J         &kp K         &kp L         &kp SEMI
-                &kp Z         &kp X         &kp C         &kp V         &kp B            &kp N         &kp M         &kp COMMA     &kp DOT       &kp FSLH
+                &kp Z         &kp X         &kp C         &kp D         &kp V            &kp N         &kp M         &kp COMMA     &kp DOT       &kp FSLH
                 &none         &none         &none         &mo NUM       &sh_ent          &lt NAV SPACE &lt FUNC BSPC &none         &none         &none
             >;
         };
-        /* Layer 5: kanata */
+
+        /* Layer 5: Kanata Layer */
         kanata_layer {
             bindings = <
                 &kp Q         &kp W         &kp E         &kp R         &kp T            &kp Y         &kp U         &kp I         &kp O         &kp P
                 &kp A         &kp S         &kp D         &kp F         &kp G            &kp H         &kp J         &kp K         &kp L         &kp SEMI
                 &kp Z         &kp X         &kp C         &kp V         &kp B            &kp N         &kp M         &kp COMMA     &kp DOT       &kp FSLH
-                &none         &none         &none         &trans        &trans           &trans        &trans        &none         &none         &none
+                &none         &none         &none         &lt FUNC INT2 &kp INT5         &kp SPACE     &kp INT4      &none         &none         &none
             >;
         };
-        /* Layer 6: game */
+
+        /* Layer 6: Game Layer */
         game_layer {
             bindings = <
                 &none         &none         &none         &none         &none            &none         &none         &none         &none         &none
@@ -125,7 +142,8 @@
                 &none         &none         &none         &trans        &trans           &trans        &trans        &none         &none         &none
             >;
         };
-        /* Layer 7: game number */
+
+        /* Layer 7: Game Number Layer */
         game_num_layer {
             bindings = <
                 &none         &none         &none         &none         &none            &none         &none         &none         &none         &none
