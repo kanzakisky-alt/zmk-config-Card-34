@@ -20,9 +20,13 @@
 };
 
 &mmv {
-    time-to-max-speed-ms = <150>;
-    acceleration-exponent = <2>;
-    max-speed = <15000>;
+    time-to-max-speed-ms = <300>;   /* Longer ramp gives you precise control on quick taps */
+    acceleration-exponent = <2>;     /* Exponential curve: starts slow, accelerates fast */
+};
+
+/* 3x Velocity Scaler for High-Res Displays */
+&mmv_input_listener {
+    input-processors = <&zip_xy_scaler 3 1>; /* Multiplies max movement output by 3x */
 };
 
 / {
@@ -31,7 +35,7 @@
         macro_sleep: macro_sleep {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            wait-ms = <100>;
+            wait-ms = <400>;
             tap-ms = <30>;
             bindings
                 = <&kp LG(X)>
