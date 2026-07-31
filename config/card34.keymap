@@ -1,6 +1,6 @@
 /* Custom Pointer & Scroll Speed Defines (Must be placed before includes) */
-#define ZMK_POINTING_DEFAULT_MOVE_VAL 5000  // Increases max speed from 600 to 5000
-#define ZMK_POINTING_DEFAULT_SCRL_VAL 50    // Increases max scroll speed from 10 to 50
+#define ZMK_POINTING_DEFAULT_MOVE_VAL 7000  // Increases max speed from 600 to 5000
+#define ZMK_POINTING_DEFAULT_SCRL_VAL 70    // Increases max scroll speed from 10 to 50
 
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
@@ -34,7 +34,7 @@
         macro_sleep: macro_sleep {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            wait-ms = <100>;
+            wait-ms = <300>;
             tap-ms = <30>;
             bindings
                 = <&kp LG(X)>
@@ -77,9 +77,9 @@
         colemak_layer {
             bindings = <
                 /* LEFT HALF */                                                 /* RIGHT HALF */
-                &q_tab_esc    &kp W         &kp F         &kp P         &kp B            &kp J         &kp L         &kp U         &kp Y         &kp MINUS
-                &hm LMETA A   &hm LALT R    &hm LCTRL S   &hm LSHFT T   &kp G            &kp M         &hm RSHFT N   &hm RCTRL E   &hm RALT O    &hm RMETA I
-                &kp Z         &kp X         &kp C         &kp D         &kp V            &kp K         &kp H         &kp COMMA     &kp DOT       &kp FSLH
+                &q_tab_esc    &kp W         &kp F         &kp P         &kp G            &kp J         &kp L         &kp U         &kp Y         &kp MINUS
+                &hm LMETA A   &hm LALT S    &hm LCTRL R   &hm LSHFT T   &kp D            &kp H         &hm RSHFT N   &hm RCTRL E   &hm RALT O    &hm RMETA I
+                &kp Z         &kp X         &kp C         &kp V         &kp B            &kp K         &kp M         &kp COMMA     &kp DOT       &kp FSLH
                 &none         &none         &none         &mo NUM       &sh_ent          &lt NAV SPACE &lt FUNC BSPC &none         &none         &none
             >;
         };
