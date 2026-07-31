@@ -84,13 +84,12 @@
             >;
         };
 
-        /* Layer 1: Symbol / Number Pad Layer */
         num_layer {
             bindings = <
                 /* LEFT HALF */                                                 /* RIGHT HALF */
-                &kp AT        &kp GRAVE     &kp CARET     &kp TILDE     &kp BSLH         &kp PIPE      &kp COLON     &kp LBKT      &kp RBKT      &kp PLUS
+                &kp JP_AT     &kp JP_GRAVE  &kp JP_CARET  &kp JP_TILDE  &kp JP_BSLH      &kp JP_PIPE   &kp JP_COLON  &kp JP_LBKT   &kp JP_RBKT   &kp JP_PLUS
                 &hm LMETA N1  &hm LALT N2   &hm LCTRL N3  &hm LSHFT N4  &kp N5           &kp N6        &hm RSHFT N7  &hm RCTRL N8  &hm RALT N9   &hm RMETA N0
-                &kp FSLH      &kp ASTRK     &kp PLUS      &kp MINUS     &kp EQUAL        &kp DOT       &kp UNDER     &kp LBRC      &kp RBRC      &kp SEMI
+                &kp JP_FSLH   &kp JP_ASTRK  &kp JP_PLUS   &kp JP_MINUS  &kp JP_EQUAL     &kp JP_DOT    &kp JP_UNDER  &kp JP_LBRC   &kp JP_RBRC   &kp JP_SEMI
                 &none         &none         &none         &trans        &trans           &trans        &trans        &none         &none         &none
             >;
         };
@@ -101,16 +100,16 @@
                 /* LEFT HALF */                                                 /* RIGHT HALF */
                 &kp ESC       &kp HOME      &kp UP        &kp END       &kp SPACE        &kp LC(C)     &mkp LCLK     &mmv MOVE_UP  &mkp RCLK     &msc SCRL_UP
                 &kp LCTRL     &kp LEFT      &kp DOWN      &kp RIGHT     &kp BSPC         &kp LC(V)     &mmv MOVE_LEFT &mmv MOVE_DOWN &mmv MOVE_RIGHT &msc SCRL_DOWN
-                &kp LMETA     &kp LALT      &kp LCTRL     &kp LSHFT     &kp TAB          &tog NAV      &kp LC(EQUAL) &kp LC(MINUS) &msc SCRL_LEFT &msc SCRL_RIGHT
+                &kp LMETA     &kp LALT      &kp LCTRL     &kp LSHFT     &kp TAB          &tog NAV      &kp LC(PLUS)  &kp LC(MINUS) &msc SCRL_LEFT &msc SCRL_RIGHT
                 &none         &none         &none         &kp LCTRL     &kp LSHFT        &mkp LCLK     &mkp RCLK     &none         &none         &none
             >;
-        };
+        }; 
 
         /* Layer 3: Function & System Layer */
         func_layer {
             bindings = <
                 /* LEFT HALF */                                                 /* RIGHT HALF */
-                &macro_sleep  &none         &none         &none         &none            &none         &none         &none         &none         &none
+                &macro_sleep  &none         &none         &kp PSCRN     &none            &none         &none         &none         &none         &none
                 &none         &none         &none         &none         &none            &none         &none         &none         &none         &none
                 &to QWERTY    &to KANATA    &to COLEMAK   &to GAME      &none            &none         &none         &none         &none         &none
                 &none         &none         &none         &trans        &trans           &trans        &trans        &none         &none         &none
@@ -143,7 +142,7 @@
                 &none         &none         &none         &none         &none            &none         &none         &none         &none         &none
                 &none         &none         &none         &none         &none            &none         &none         &none         &none         &none
                 &none         &none         &none         &none         &none            &none         &none         &none         &none         &none
-                &none         &none         &none         &trans        &trans           &trans        &trans        &none         &none         &none
+                &none         &none         &none         &mo NUM       &sh_ent          &lt NAV SPACE &lt FUNC BSPC &none         &none         &none
             >;
         };
 
