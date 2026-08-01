@@ -116,7 +116,7 @@
                 /* LEFT HALF */                                                 /* RIGHT HALF */
                 &macro_sleep  &kp C_BRI_UP  &kp C_VOL_UP  &kp PSCRN     &kp C_NEXT       &none         &none         &none         &none         &none
                 &kp MUTE      &kp C_BRI_DN  &kp C_VOL_DN  &kp C_PP      &kp C_PREV       &none         &none         &none         &none         &none
-                &to QWERTY    &to KANATA    &to COLEMAK   &none         &to GAME         &to NAV       &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_CLR
+                &to QWERTY    &to KANATA    &to COLEMAK   &none         &to GAME         &tog NAV      &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_CLR
                 &none         &none         &none         &trans        &trans           &trans        &trans        &none         &none         &none
             >;
         };
