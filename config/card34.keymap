@@ -106,7 +106,7 @@
                 /* LEFT HALF */                                                 /* RIGHT HALF */
                 &none         &none         &none         &none         &none            &none         &none         &none         &none         &none
                 &none         &none         &none         &none         &none            &none         &none         &none         &none         &none
-                &to QWERTY    &to KANATA    &to COLEMAK   &none         &none            &tog NAV      &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_CLR
+                &to QWERTY    &to GAME      &to COLEMAK   &none         &none            &tog NAV      &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_CLR
                 &none         &none         &none         &trans        &trans           &trans        &trans        &none         &none         &none
             >;
         };
