@@ -124,7 +124,7 @@
         /* Layer 5: Number Layer */
         num_layer {
             bindings = <
-                &kp EXCL      &kp QUOTE     &kp HASH      &kp DLLR      &kp PRCNT        &kp AMPS      &kp APOS      &kp LPAR      &kp RPAR      &kp PLUS
+                &kp EXCL      &kp DQT       &kp HASH      &kp DLLR      &kp PRCNT        &kp AMPS      &kp SQT       &kp LPAR      &kp RPAR      &kp PLUS
                 &hm LMETA N1  &hm LALT N2   &hm LCTRL N3  &hm LSHFT N4  &kp N5           &kp N6        &hm RSHFT N7  &hm RCTRL N8  &hm RALT N9   &hm RMETA N0
                 &kp GRAVE     &kp AT        &kp PIPE      &kp COLON     &kp BSLH         &kp DOT       &kp UNDER     &kp LBKT      &kp RBKT      &kp SEMI
                 &none         &none         &none         &trans        &trans           &trans        &trans        &none         &none         &none
