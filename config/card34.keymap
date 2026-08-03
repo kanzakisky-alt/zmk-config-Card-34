@@ -10,7 +10,7 @@
 // Layer Index Definitions
 #define COLEMAK 0
 #define QWERTY  1
-#define KANATA  2
+#define GAME    2
 #define FUNC    3
 #define NAV     4
 #define NUM     5
@@ -91,13 +91,13 @@
                 &none         &none         &none         &mo NUM       &sh_ent          &lt NAV SPACE &lt FUNC BSPC &none         &none         &none
             >;
         };
-        /* Layer 2: Kanata Layer */
-        kanata_layer {
+        /* Layer 2: Game Layer */
+        game layer {
             bindings = <
-                &kp Q         &kp W         &kp E         &kp R         &kp T            &kp Y         &kp U         &kp I         &kp O         &kp P
-                &kp A         &kp S         &kp D         &kp F         &kp G            &kp H         &kp J         &kp K         &kp L         &kp SEMI
-                &kp Z         &kp X         &kp C         &kp V         &kp B            &kp N         &kp M         &kp COMMA     &kp DOT       &kp FSLH
-                &none         &none         &none         &lt FUNC INT2 &kp INT5         &kp SPACE     &kp INT4      &none         &none         &none
+                &kp ESC       &kp Q         &kp W         &kp E         &kp T            &trans        &trans        &mmv MOVE_UP   &trans        &mcs SCRL_UP        
+                &kp LCTRL     &kp A         &kp S         &kp D         &kp F            &trans        &mmv MOVE_LEFT &mmv MOVE_DOWN &mmv MOVE_RIGHT &mcs SCRL_DOWN        
+                &kp LSHIFT    &kpZ          &kp X         &kp C         &kp V            &trans        &kp N1        &kp N2        &N3        &N4        
+                &none         &none         &none         &mo FUNC      &kp SPACE        &mkp LCLK     &mkp RCLK     &none          &none          &none
             >;
         };
         /* Layer 4: Function & System Layer */
@@ -116,7 +116,7 @@
                 /* LEFT HALF */                                                 /* RIGHT HALF */
                 &kp ESC       &kp HOME      &kp UP        &kp END       &kp SPACE        &kp LC(C)     &mkp LCLK     &mmv MOVE_UP   &mkp RCLK      &msc SCRL_UP
                 &kp LCTRL     &kp LEFT      &kp DOWN      &kp RIGHT     &kp BSPC         &kp LC(V)     &mmv MOVE_LEFT &mmv MOVE_DOWN &mmv MOVE_RIGHT &msc SCRL_DOWN
-                &kp LMETA     &kp LALT      &kp LCTRL     &kp LSHFT     &kp TAB          &trans        &kp LC(EQUAL) &kp LC(MINUS)  &msc SCRL_LEFT  &msc SCRL_RIGHT
+                &kp LMETA     &kp LALT      &kp LCTRL     &kp LSHFT     &kp TAB          &trans        &kp LC(msc SCRL_UP) &kp LC(msc SCRL_DOWN) &msc SCRL_LEFT  &msc SCRL_RIGHT
                 &none         &none         &none         &kp LCTRL     &kp LSHFT        &mkp LCLK     &mkp RCLK     &none          &none          &none
             >;
         };
