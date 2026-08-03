@@ -96,7 +96,7 @@
             bindings = <
                 &kp ESC       &kp Q         &kp W         &kp E         &kp T            &trans        &trans        &mmv MOVE_UP   &trans        &mcs SCRL_UP        
                 &kp LCTRL     &kp A         &kp S         &kp D         &kp F            &trans        &mmv MOVE_LEFT &mmv MOVE_DOWN &mmv MOVE_RIGHT &mcs SCRL_DOWN        
-                &kp LSHIFT    &kpZ          &kp X         &kp C         &kp V            &trans        &kp N1        &kp N2        &N3        &N4        
+                &kp LSHIFT    &kp Z         &kp X         &kp C         &kp V            &trans        &kp N1        &kp N2        &N3        &N4        
                 &none         &none         &none         &mo FUNC      &kp SPACE        &mkp LCLK     &mkp RCLK     &none          &none          &none
             >;
         };
