@@ -10,10 +10,11 @@
 // Layer Index Definitions
 #define COLEMAK 0
 #define QWERTY  1
-#define GAME    2
-#define FUNC    3
-#define NAV     4
-#define NUM     5
+#define CUSTOM  2
+#define GAME    3
+#define FUNC    4
+#define NAV     5
+#define NUM     6
 
 /* Mouse & Scroll Acceleration Adjustments */
 &msc {
@@ -90,7 +91,15 @@
                 &none         &none         &none         &mo NUM       &hm LSHFT SPACE  &lt NAV SPACE &lt FUNC BSPC &none         &none         &none
             >;
         };
-
+        /* Engram-Canary Hybrid v2 (Custom-30 Dual-Lang) */
+        custom_layer {
+            bindings = <
+                &kp Q         &kp W         &kp O         &kp U         &kp MINUS        &kp V         &kp F         &kp R         &kp M         &kp X
+                &hm LMETA G   &hm LALT I    &hm LCTRL E   &hm LSHFT A   &kp D            &hm RMETA S   &hm RSHFT H   &hm RCTRL T   &hm RALT N    &kp B
+                &kp Z         &kp P         &kp C         &kp Y         &kp SQT          &kp FSLH      &kp K         &kp L         &kp COMMA     &kp J
+                &none         &none         &none         &mo FUNC      &kp SPACE        &mkp LCLK     &mkp RCLK     &none         &none         &none
+            >;
+        };
         /* Layer 2: Game Layer */
         game_layer {
             bindings = <
@@ -106,7 +115,7 @@
             bindings = <
                 &none         &kp C_BRI_UP  &kp C_VOL_UP  &kp C_MUTE    &kp C_FF         &none         &none         &none         &none         &kp PSCRN
                 &none         &kp C_BRI_DN  &kp C_VOL_DN  &kp C_PP      &kp C_RW         &none         &none         &none         &none         &none
-                &to QWERTY    &to GAME      &to COLEMAK   &none         &none            &to NAV       &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_CLR
+                &to QWERTY    &to GAME      &to COLEMAK   &to CUSTOM    &none            &to NAV       &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_CLR
                 &none         &none         &none         &trans        &trans           &trans        &trans        &none         &none         &none
             >;
         };
