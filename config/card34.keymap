@@ -51,7 +51,7 @@
             tapping-term-ms = <200>;
             quick-tap-ms = <150>;
             flavor = "tap-preferred";
-            bindings = <&kp>, <&kp>;
+            bindings = <&kp &kp>;
         };
 
         /* Tap-Dance: Single = Q, Double = TAB, Triple = ESC */
@@ -62,14 +62,14 @@
             bindings = <&kp Q>, <&kp TAB>, <&kp ESC>;
         };
 
-        /* Hold-Tap Helper: Hold = Shift, Tap = Enter */
+        /* Hold-Tap Helper: Accepts hold and tap key arguments */
         sh_ent: shift_enter_holdtap {
             compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <0>;
+            #binding-cells = <2>;
             tapping-term-ms = <200>;
             quick-tap-ms = <150>;
             flavor = "hold-preferred";
-            bindings = <&kp LSHFT &kp ENTER>;
+            bindings = <&kp &kp>;
         };
 
         /* Tap-Dance: Single/Hold = Enter/Shift, Double Tap = Caps Word */
@@ -77,7 +77,7 @@
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
             tapping-term-ms = <220>;
-            bindings = <&sh_ent>, <&caps_word>;
+            bindings = <&sh_ent LSHFT ENTER>, <&caps_word>;
         };
     };
 
