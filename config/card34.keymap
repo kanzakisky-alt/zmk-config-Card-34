@@ -8,15 +8,17 @@
 #include <dt-bindings/zmk/bt.h>
 
 // Clean Layer Index Definitions
-#define COLEMAK  0
-#define QWERTY   1
-#define GAME     2
-#define GAME_NUM 3   /* Left-hand weapon/number overlay for gaming */
-#define FUNC     4
-#define NAV      5
-#define NUM      6
-#define ART      7   /* Reserved: Left-hand Macropad for Drawing / Krita */
-#define BLANK_1  8   /* Reserved for future expansion */
+#define COLEMAK      0
+#define QWERTY       1
+#define GAME         2
+#define GAME_NUM     3   /* Left-hand weapon/number overlay for gaming */
+#define FUNC         4
+#define NAV          5
+#define NUM          6
+#define ART_KRITA    7   /* Krita Drawing Layer */
+#define ART_ONENOTE  8   /* OneNote Layer */
+#define ART_LIBRE    9   /* LibreSprite Pixel Art Layer */
+#define MACRO_SEL    10  /* Left-Hand App Switcher Overlay */
 
 /* Mouse & Scroll Acceleration Adjustments */
 &msc {
@@ -62,22 +64,14 @@
             bindings = <&kp Q>, <&kp TAB>, <&kp ESC>;
         };
 
-        /* Hold-Tap Helper: Accepts hold and tap key arguments */
-        sh_ent: shift_enter_holdtap {
+        /* Hold-Tap: Tap = Enter (rapid spam allowed), Hold (>200ms) = Caps Word */
+        ent_caps: enter_caps_holdtap {
             compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
+            #binding-cells = <0>;
             tapping-term-ms = <200>;
             quick-tap-ms = <150>;
-            flavor = "hold-preferred";
-            bindings = <&kp &kp>;
-        };
-
-        /* Tap-Dance: Single/Hold = Enter/Shift, Double Tap = Caps Word */
-        ent_sh_caps: enter_shift_caps_tapdance {
-            compatible = "zmk,behavior-tap-dance";
-            #binding-cells = <0>;
-            tapping-term-ms = <220>;
-            bindings = <&sh_ent LSHFT ENTER>, <&caps_word>;
+            flavor = "tap-preferred";
+            bindings = <&caps_word>, <&kp ENTER>;
         };
     };
 
@@ -90,7 +84,7 @@
                 &q_tab_esc    &kp W         &kp F         &kp P         &kp G            &kp J         &kp L         &kp U         &kp Y         &kp MINUS
                 &hm LMETA A   &hm LALT S    &hm LCTRL R   &hm LSHFT T   &kp D            &kp H         &hm RSHFT N   &hm RCTRL E   &hm RALT O    &hm RMETA I
                 &kp Z         &kp X         &kp C         &kp V         &kp B            &kp K         &kp M         &kp COMMA     &kp DOT       &kp FSLH
-                &none         &none         &none         &ent_sh_caps  &mo NUM          &lt NAV SPACE &lt FUNC BSPC &none         &none         &none
+                &none         &none         &none         &ent_caps     &mo NUM          &lt NAV SPACE &lt FUNC BSPC &none         &none         &none
             >;
         };
 
@@ -100,7 +94,7 @@
                 &kp Q         &kp W         &kp E         &kp R         &kp T            &kp Y         &kp U         &kp I         &kp O         &kp P
                 &kp A         &kp S         &kp D         &kp F         &kp G            &kp H         &kp J         &kp K         &kp L         &kp SEMI
                 &kp Z         &kp X         &kp C         &kp V         &kp B            &kp N         &kp M         &kp COMMA     &kp DOT       &kp FSLH
-                &none         &none         &none         &ent_sh_caps  &mo NUM          &lt NAV SPACE &lt FUNC BSPC &none         &none         &none
+                &none         &none         &none         &ent_caps     &mo NUM          &lt NAV SPACE &lt FUNC BSPC &none         &none         &none
             >;
         };
 
@@ -110,7 +104,7 @@
                 &kp ESC       &kp Q         &kp W         &kp E         &kp R            &none         &none         &none         &none         &none
                 &kp LSHIFT    &kp A         &kp S         &kp D         &kp F            &none         &none         &none         &none         &none
                 &kp LCTRL     &kp Z         &kp X         &kp C         &kp V            &none         &none         &none         &none         &none
-                &none         &none         &none         &sl GAME_NUM  &kp SPACE        &none         &none         &none         &none         &none
+                &none         &none         &none         &sl GAME_NUM  &kp SPACE        &mo NAV       &none         &none         &none         &none
             >;
         };
 
@@ -124,12 +118,12 @@
             >;
         };
 
-        /* Layer 4: Function & System Layer */
+        /* Layer 4: Function & System Layer (Layer Toggles & BT on Right Hand) */
         func_layer {
             bindings = <
                 &soft_off     &kp C_BRI_UP  &kp C_VOL_UP  &kp C_MUTE    &kp C_FF         &none         &kp LC(LS(TAB)) &kp LG(UP)   &kp LC(TAB)   &kp PSCRN
                 &macro_sleep  &kp C_BRI_DN  &kp C_VOL_DN  &kp C_PP      &kp C_RW         &none         &kp LG(LC(LEFT)) &kp LG(DOWN) &kp LG(LC(RIGHT)) &none
-                &to COLEMAK   &to QWERTY    &to GAME      &to ART       &none            &to NAV       &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_CLR
+                &to COLEMAK   &to QWERTY    &to GAME      &to MACRO_SEL  &none            &to NAV       &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_CLR
                 &none         &none         &none         &trans        &trans           &trans        &trans        &none         &none         &none
             >;
         };
@@ -154,23 +148,43 @@
             >;
         };
 
-        /* Layer 7: Reserved Art / Macropad Layer (Left hand Drawing shortcuts) */
-        art_layer {
+        /* Layer 7: Krita Drawing Shortcuts (Right Hand Completely Disabled) */
+        krita_layer {
             bindings = <
-                &none         &none         &none         &none         &none            &none         &none         &none         &none         &none
-                &none         &none         &none         &none         &none            &none         &none         &none         &none         &none
-                &none         &none         &none         &none         &none            &none         &none         &none         &none         &none
-                &none         &none         &none         &trans        &trans           &trans        &trans        &none         &none         &none
+                &kp ESC       &kp B         &kp E         &kp O         &kp LBKT         &none         &none         &none         &none         &none
+                &kp LCTRL     &kp LC(Z)     &kp LC(LS(Z)) &kp SPACE     &kp RBKT         &none         &none         &none         &none         &none
+                &kp LSHIFT    &kp LC(S)     &kp S         &kp LC(LS(A)) &kp M            &none         &none         &none         &none         &none
+                &none         &none         &none         &mo MACRO_SEL &kp PLUS         &none         &none         &none         &none         &none
             >;
         };
 
-        /* Layer 8: Blank Expansion Layer */
-        blank_layer {
+        /* Layer 8: OneNote Shortcuts (Right Hand Completely Disabled) */
+        onenote_layer {
             bindings = <
+                &kp ESC       &kp LC(F1)    &kp LC(Z)     &kp LC(Y)     &kp LG(LS(S))    &none         &none         &none         &none         &none
+                &kp LCTRL     &kp SPACE     &kp E         &kp P         &kp L            &none         &none         &none         &none         &none
+                &kp LSHIFT    &kp LC(N)     &kp LC(MINUS) &kp LC(EQL)   &kp F11          &none         &none         &none         &none         &none
+                &none         &none         &none         &mo MACRO_SEL &kp SPACE        &none         &none         &none         &none         &none
+            >;
+        };
+
+        /* Layer 9: LibreSprite Shortcuts (Right Hand Completely Disabled) */
+        libresprite_layer {
+            bindings = <
+                &kp ESC       &kp B         &kp E         &kp I         &kp G            &none         &none         &none         &none         &none
+                &kp LCTRL     &kp LC(Z)     &kp LC(Y)     &kp SPACE     &kp L            &none         &none         &none         &none         &none
+                &kp LSHIFT    &kp COMMA     &kp DOT       &kp ENTER     &kp LC(S)        &none         &none         &none         &none         &none
+                &none         &none         &none         &mo MACRO_SEL &kp N2           &none         &none         &none         &none         &none
+            >;
+        };
+
+        /* Layer 10: Art App Switcher Overlay (Hold left thumb + press top key to swap modes) */
+        MACRO_SEL_layer {
+            bindings = <
+                &none         &none         &none         &none         &none            &to COLEMAK   &to ART_KRITA &to ART_ONENOTE &to ART_LIBRE &none
                 &none         &none         &none         &none         &none            &none         &none         &none         &none         &none
                 &none         &none         &none         &none         &none            &none         &none         &none         &none         &none
-                &none         &none         &none         &none         &none            &none         &none         &none         &none         &none
-                &none         &none         &none         &trans        &trans           &trans        &trans        &none         &none         &none
+                &none         &none         &none         &trans        &none            &none         &none         &none         &none         &none
             >;
         };
     };
