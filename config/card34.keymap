@@ -35,7 +35,7 @@
         macro_sleep: macro_sleep {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            wait-ms = <300>;
+            wait-ms = <500>;
             tap-ms = <30>;
             bindings
                 = <&kp LG(X)>
@@ -108,8 +108,8 @@
         game_layer {
             bindings = <
                 &kp ESC       &kp Q         &kp W         &kp E         &kp R            &none         &none         &none         &none         &none
-                &kp LCTRL     &kp A         &kp S         &kp D         &kp F            &none         &none         &none         &none         &none
-                &kp LSHIFT    &kp Z         &kp X         &kp C         &kp V            &none         &none         &none         &none         &none
+                &kp LSHIFT    &kp A         &kp S         &kp D         &kp F            &none         &none         &none         &none         &none
+                &kp LCTRL     &kp Z         &kp X         &kp C         &kp V            &none         &none         &none         &none         &none
                 &none         &none         &none         &sl GAME_NUM  &kp SPACE        &none         &none         &none         &none         &none
             >;
         };
@@ -117,9 +117,9 @@
         /* Layer 3: Game Quick-Select Overlay (1, 2, 3, 4 + Utility) */
         game_num_layer {
             bindings = <
-                &kp GRAVE     &kp N1        &kp N2        &kp N3        &kp N4           &none         &none         &none         &none         &none
-                &kp TAB       &trans        &trans        &trans        &kp G            &none         &none         &none         &none         &none
-                &trans        &trans        &trans        &trans        &trans           &none         &none         &none         &none         &none
+                &kp GRAVE     &kp N4        &kp N5        &kp N6        &kp T            &none         &none         &none         &none         &none
+                &kp TAB       &kp N1        &kp N2        &kp N3        &kp G            &none         &none         &none         &none         &none
+                &trans        &trans        &trans        &trans        &kp B            &none         &none         &none         &none         &none
                 &none         &none         &none         &trans        &trans           &none         &none         &none         &none         &none
             >;
         };
