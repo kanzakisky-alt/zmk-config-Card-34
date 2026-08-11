@@ -31,6 +31,7 @@
 
 / {
     behaviors {
+        /* Macro: Windows Sleep Sequence (Win+X -> U -> S) */
         macro_sleep: macro_sleep {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
@@ -43,6 +44,7 @@
                 ;
         };
 
+        /* Home Row Mods (Hold = Modifier, Tap = Key) */
         hm: home_row_mod {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -52,6 +54,7 @@
             bindings = <&kp>, <&kp>;
         };
 
+        /* Tap-Dance: Single = Q, Double = TAB, Triple = ESC */
         q_tab_esc: q_tab_esc_tapdance {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
@@ -59,15 +62,17 @@
             bindings = <&kp Q>, <&kp TAB>, <&kp ESC>;
         };
 
+        /* Hold-Tap Helper: Hold = Shift, Tap = Enter */
         sh_ent: shift_enter_holdtap {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <0>;
             tapping-term-ms = <200>;
             quick-tap-ms = <150>;
             flavor = "hold-preferred";
-            bindings = <&kp LSHFT>, <&kp ENTER>;
+            bindings = <&kp LSHFT &kp ENTER>;
         };
 
+        /* Tap-Dance: Single/Hold = Enter/Shift, Double Tap = Caps Word */
         ent_sh_caps: enter_shift_caps_tapdance {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
@@ -99,22 +104,22 @@
             >;
         };
 
-        /* Layer 2: Game Base Layer */
+        /* Layer 2: Base Game Layer */
         game_layer {
             bindings = <
-                &kp ESC       &kp Q         &kp W         &kp E         &kp T            &trans        &trans        &mmv MOVE_UP  &trans        &msc SCRL_UP
-                &kp LSHIFT    &kp A         &kp S         &kp D         &kp F            &trans        &mmv MOVE_LEFT &mmv MOVE_DOWN &mmv MOVE_RIGHT &msc SCRL_DOWN
-                &kp LCTRL     &kp Z         &kp X         &kp C         &kp V            &trans        &kp N1        &kp N2        &kp N3        &kp N4
-                &none         &none         &none         &sl GAME_NUM  &kp SPACE        &mkp LCLK     &mkp RCLK     &none         &none         &none
+                &kp ESC       &kp Q         &kp W         &kp E         &kp R            &none         &none         &none         &none         &none
+                &kp LCTRL     &kp A         &kp S         &kp D         &kp F            &none         &none         &none         &none         &none
+                &kp LSHIFT    &kp Z         &kp X         &kp C         &kp V            &none         &none         &none         &none         &none
+                &none         &none         &none         &sl GAME_NUM  &kp SPACE        &none         &none         &none         &none         &none
             >;
         };
 
-        /* Layer 3: Game Number & Function Overlay (Left Hand Focus) */
+        /* Layer 3: Game Quick-Select Overlay (1, 2, 3, 4 + Utility) */
         game_num_layer {
             bindings = <
-                &kp N1        &kp N2        &kp N3        &kp N4        &kp N5           &none         &none         &none         &none         &none
-                &kp N6        &kp N7        &kp N8        &kp N9        &kp N0           &none         &none         &none         &none         &none
-                &kp F1        &kp F2        &kp F3        &kp F4        &kp F5           &none         &none         &none         &none         &none
+                &kp GRAVE     &kp N1        &kp N2        &kp N3        &kp N4           &none         &none         &none         &none         &none
+                &kp TAB       &trans        &trans        &trans        &kp G            &none         &none         &none         &none         &none
+                &trans        &trans        &trans        &trans        &trans           &none         &none         &none         &none         &none
                 &none         &none         &none         &trans        &trans           &none         &none         &none         &none         &none
             >;
         };
@@ -149,7 +154,7 @@
             >;
         };
 
-        /* Layer 7: Reserved Art / Macropad Layer (Left hand Krita/Drawing shortcuts) */
+        /* Layer 7: Reserved Art / Macropad Layer (Left hand Drawing shortcuts) */
         art_layer {
             bindings = <
                 &none         &none         &none         &none         &none            &none         &none         &none         &none         &none
