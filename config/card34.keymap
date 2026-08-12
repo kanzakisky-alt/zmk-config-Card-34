@@ -1,4 +1,4 @@
-/* Custom Pointer & Scroll Speed Defines (Must be placed before includes) */
+/* Custom Pointer & Scroll Speed Defines */
 #define ZMK_POINTING_DEFAULT_MOVE_VAL 10000
 #define ZMK_POINTING_DEFAULT_SCRL_VAL 100
 
@@ -11,52 +11,29 @@
 #define COLEMAK      0
 #define QWERTY       1
 #define GAME         2
-#define GAME_NUM     3   /* Left-hand weapon/number overlay for gaming */
+#define GAME_NUM     3
 #define FUNC         4
 #define NAV          5
 #define NUM          6
-#define ART_KRITA    7   /* Krita Drawing Layer */
-#define ART_ONENOTE  8   /* OneNote Layer */
-#define ART_LIBRE    9   /* LibreSprite Pixel Art Layer */
-#define MACRO_SEL    10  /* Left-Hand App Switcher Overlay */
-
-/* Mouse & Scroll Acceleration Adjustments */
-&msc {
-    time-to-max-speed-ms = <100>;
-    acceleration-exponent = <1>;
-};
-
-&mmv {
-    time-to-max-speed-ms = <300>;
-    acceleration-exponent = <2>;
-};
+#define ART_KRITA    7   /* Krita Layer Slate */
+#define ART_ONENOTE  8   /* OneNote Layer Slate */
+#define ART_LIBRE    9   /* LibreSprite Layer Slate */
+#define MACRO_SEL    10  /* Right-Hand Control Panel / Switcher */
+#define ART_NAV      11  /* Universal Left-Hand Canvas Nav Overlay */
 
 / {
     behaviors {
-        /* Macro: Windows Sleep Sequence (Win+X -> U -> S) */
-        macro_sleep: macro_sleep {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            wait-ms = <500>;
-            tap-ms = <30>;
-            bindings
-                = <&kp LG(X)>
-                , <&kp U>
-                , <&kp S>
-                ;
-        };
-
-        /* Home Row Mods (Hold = Modifier, Tap = Key) */
+        /* Home Row Mods */
         hm: home_row_mod {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             tapping-term-ms = <200>;
             quick-tap-ms = <150>;
             flavor = "tap-preferred";
-            bindings = <&kp &kp>;
+            bindings = <&kp>, <&kp>;
         };
 
-        /* Tap-Dance: Single = Q, Double = TAB, Triple = ESC */
+        /* Tap-Dance: Q / TAB / ESC */
         q_tab_esc: q_tab_esc_tapdance {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
@@ -64,7 +41,7 @@
             bindings = <&kp Q>, <&kp TAB>, <&kp ESC>;
         };
 
-        /* Hold-Tap: Tap = Enter (rapid spam allowed), Hold (>200ms) = Caps Word */
+        /* Hold-Tap: Enter / Caps Word */
         ent_caps: enter_caps_holdtap {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <0>;
@@ -108,7 +85,7 @@
             >;
         };
 
-        /* Layer 3: Game Quick-Select Overlay (1, 2, 3, 4 + Utility) */
+        /* Layer 3: Game Quick-Select Overlay */
         game_num_layer {
             bindings = <
                 &kp GRAVE     &kp N4        &kp N5        &kp N6        &kp T            &none         &none         &none         &none         &none
@@ -118,7 +95,7 @@
             >;
         };
 
-        /* Layer 4: Function & System Layer (Layer Toggles & BT on Right Hand) */
+        /* Layer 4: Function & System Layer */
         func_layer {
             bindings = <
                 &soft_off     &kp C_BRI_UP  &kp C_VOL_UP  &kp C_MUTE    &kp C_FF         &none         &kp LC(LS(TAB)) &kp LG(UP)   &kp LC(TAB)   &kp PSCRN
@@ -148,42 +125,52 @@
             >;
         };
 
-        /* Layer 7: Krita Drawing Shortcuts (Right Hand Completely Disabled) */
+        /* Layer 7: Krita Starter Slate */
         krita_layer {
             bindings = <
-                &kp ESC       &kp B         &kp E         &kp O         &kp LBKT         &none         &none         &none         &none         &none
-                &kp LCTRL     &kp LC(Z)     &kp LC(LS(Z)) &kp SPACE     &kp RBKT         &none         &none         &none         &none         &none
-                &kp LSHIFT    &kp LC(S)     &kp S         &kp LC(LS(A)) &kp M            &none         &none         &none         &none         &none
-                &none         &none         &none         &mo MACRO_SEL &kp PLUS         &none         &none         &none         &none         &none
+                &kp ESC       &none         &none         &none         &none            &none         &none         &none         &none         &none
+                &kp LCTRL     &kp B         &kp E         &kp L         &none            &none         &none         &none         &none         &none
+                &kp LSHIFT    &none         &none         &none         &none            &none         &none         &none         &none         &none
+                &none         &none         &none         &mo MACRO_SEL &mo ART_NAV      &none         &none         &none         &none         &none
             >;
         };
 
-        /* Layer 8: OneNote Shortcuts (Right Hand Completely Disabled) */
+        /* Layer 8: OneNote Starter Slate */
         onenote_layer {
             bindings = <
-                &kp ESC       &kp LC(F1)    &kp LC(Z)     &kp LC(Y)     &kp LG(LS(S))    &none         &none         &none         &none         &none
-                &kp LCTRL     &kp SPACE     &kp E         &kp P         &kp L            &none         &none         &none         &none         &none
-                &kp LSHIFT    &kp LC(N)     &kp LC(MINUS) &kp LC(EQL)   &kp F11          &none         &none         &none         &none         &none
-                &none         &none         &none         &mo MACRO_SEL &kp SPACE        &none         &none         &none         &none         &none
+                &kp ESC       &none         &none         &none         &none            &none         &none         &none         &none         &none
+                &kp LCTRL     &kp P         &kp E         &kp L         &none            &none         &none         &none         &none         &none
+                &kp LSHIFT    &none         &none         &none         &none            &none         &none         &none         &none         &none
+                &none         &none         &none         &mo MACRO_SEL &mo ART_NAV      &none         &none         &none         &none         &none
             >;
         };
 
-        /* Layer 9: LibreSprite Shortcuts (Right Hand Completely Disabled) */
+        /* Layer 9: LibreSprite Starter Slate */
         libresprite_layer {
             bindings = <
-                &kp ESC       &kp B         &kp E         &kp I         &kp G            &none         &none         &none         &none         &none
-                &kp LCTRL     &kp LC(Z)     &kp LC(Y)     &kp SPACE     &kp L            &none         &none         &none         &none         &none
-                &kp LSHIFT    &kp COMMA     &kp DOT       &kp ENTER     &kp LC(S)        &none         &none         &none         &none         &none
-                &none         &none         &none         &mo MACRO_SEL &kp N2           &none         &none         &none         &none         &none
+                &kp ESC       &none         &none         &none         &none            &none         &none         &none         &none         &none
+                &kp LCTRL     &kp B         &kp E         &kp L         &none            &none         &none         &none         &none         &none
+                &kp LSHIFT    &none         &none         &none         &none            &none         &none         &none         &none         &none
+                &none         &none         &none         &mo MACRO_SEL &mo ART_NAV      &none         &none         &none         &none         &none
             >;
         };
 
-        /* Layer 10: Art App Switcher Overlay (Hold left thumb + press top key to swap modes) */
+        /* Layer 10: Right-Hand Control Panel / App Switcher */
         MACRO_SEL_layer {
             bindings = <
                 &none         &none         &none         &none         &none            &to COLEMAK   &to ART_KRITA &to ART_ONENOTE &to ART_LIBRE &none
-                &none         &none         &none         &none         &none            &none         &none         &none         &none         &none
-                &none         &none         &none         &none         &none            &none         &none         &none         &none         &none
+                &none         &none         &none         &none         &none            &to QWERTY    &none         &none           &none         &none
+                &none         &none         &none         &none         &none            &to GAME      &none         &none           &none         &none
+                &none         &none         &none         &trans        &none            &none         &none         &none           &none         &none
+            >;
+        };
+
+        /* Layer 11: Canvas Navigation & Zoom Overlay (Active across all art layers) */
+        art_nav_layer {
+            bindings = <
+                &none         &none         &kp UP        &none         &none            &none         &none         &none         &none         &none
+                &none         &kp LEFT      &kp DOWN      &kp RIGHT     &none            &none         &none         &none         &none         &none
+                &none         &none         &kp LC(MINUS) &kp LC(EQL)   &none            &none         &none         &none         &none         &none
                 &none         &none         &none         &trans        &none            &none         &none         &none         &none         &none
             >;
         };
