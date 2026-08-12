@@ -23,6 +23,18 @@
 
 / {
     behaviors {
+        /* Macro: Windows Sleep Sequence (Win+X -> U -> S) */
+        macro_sleep: macro_sleep {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <500>;
+            tap-ms = <30>;
+            bindings
+                = <&kp LG(X)>
+                , <&kp U>
+                , <&kp S>
+                ;
+        };
         /* Home Row Mods */
         hm: home_row_mod {
             compatible = "zmk,behavior-hold-tap";
