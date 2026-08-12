@@ -216,6 +216,7 @@
                 &trans        &trans        &trans        &trans        &trans           &trans        &trans        &trans        &trans        &trans      
                 &to COLEMAK   &to QWERTY    &to GAME      &to ART       &none            &trans        &trans        &trans        &trans        &trans      
                 &none         &none         &none         &trans        &trans           &trans        &trans        &none         &none         &none
-            >;};
+            >;
+        };
     };
 };
