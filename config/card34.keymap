@@ -1,4 +1,4 @@
-/* Custom Pointer & Scroll Speed Defines */
+/* Custom Pointer & Scroll Speed Defines (Must be placed before includes) */
 #define ZMK_POINTING_DEFAULT_MOVE_VAL 10000
 #define ZMK_POINTING_DEFAULT_SCRL_VAL 100
 
@@ -8,18 +8,26 @@
 #include <dt-bindings/zmk/bt.h>
 
 // Clean Layer Index Definitions
-#define COLEMAK      0
-#define QWERTY       1
-#define GAME         2
-#define GAME_NUM     3
-#define FUNC         4
-#define NAV          5
-#define NUM          6
-#define ART_KRITA    7   /* Krita Layer Slate */
-#define ART_ONENOTE  8   /* OneNote Layer Slate */
-#define ART_LIBRE    9   /* LibreSprite Layer Slate */
-#define MACRO_SEL    10  /* Right-Hand Control Panel / Switcher */
-#define ART_NAV      11  /* Universal Left-Hand Canvas Nav Overlay */
+#define COLEMAK  0
+#define QWERTY   1
+#define GAME     2
+#define GAME_NUM 3   /* Left-hand weapon/number overlay for gaming */
+#define FUNC     4
+#define NAV      5
+#define NUM      6
+#define ART      7   
+#define ART_NAV  8   /* Reserved for future expansion */
+
+/* Mouse & Scroll Acceleration Adjustments */
+&msc {
+    time-to-max-speed-ms = <100>;
+    acceleration-exponent = <1>;
+};
+
+&mmv {
+    time-to-max-speed-ms = <300>;
+    acceleration-exponent = <2>;
+};
 
 / {
     behaviors {
@@ -35,17 +43,63 @@
                 , <&kp S>
                 ;
         };
-        /* Home Row Mods */
+        macro_eraser: macro_eraser {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <100>;
+            tap-ms = <30>;
+            bindings =
+                <&kp LA(D)>,
+                <&kp G>,
+                <&kp SPACE>;
+        };
+        macro_pen1: macro_pen1 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <100>;
+            tap-ms = <30>;
+            bindings =
+                <&kp LA(D)>,
+                <&kp G>,
+                <&kp RIGHT>,
+                <&kp RIGHT>,
+                <&kp SPACE>;
+        };
+        macro_pen2: macro_pen2 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <100>;
+            tap-ms = <30>;
+            bindings =
+                <&kp LA(D)>,
+                <&kp G>,
+                <&kp RIGHT>,
+                <&kp RIGHT>,
+                <&kp RIGHT>,
+                <&kp SPACE>;
+        };
+        macro_lasso: macro_lasso {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <100>;
+            tap-ms = <30>;
+            bindings =
+                <&kp LA(D)>,
+                <&kp G>,
+                <&kp L>;
+        };
+
+        /* Home Row Mods (Hold = Modifier, Tap = Key) */
         hm: home_row_mod {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             tapping-term-ms = <200>;
             quick-tap-ms = <150>;
             flavor = "tap-preferred";
-            bindings = <&kp>, <&kp>;
+            bindings = <&kp &kp>;
         };
 
-        /* Tap-Dance: Q / TAB / ESC */
+        /* Tap-Dance: Single = Q, Double = TAB, Triple = ESC */
         q_tab_esc: q_tab_esc_tapdance {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
@@ -53,14 +107,22 @@
             bindings = <&kp Q>, <&kp TAB>, <&kp ESC>;
         };
 
-        /* Hold-Tap: Enter / Caps Word */
-        ent_caps: enter_caps_holdtap {
+        /* Hold-Tap Helper: Accepts hold and tap key arguments */
+        sh_ent: shift_enter_holdtap {
             compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <0>;
+            #binding-cells = <2>;
             tapping-term-ms = <200>;
             quick-tap-ms = <150>;
-            flavor = "tap-preferred";
-            bindings = <&caps_word>, <&kp ENTER>;
+            flavor = "hold-preferred";
+            bindings = <&kp &kp>;
+        };
+
+        /* Tap-Dance: Single/Hold = Enter/Shift, Double Tap = Caps Word */
+        ent_sh_caps: enter_shift_caps_tapdance {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <220>;
+            bindings = <&sh_ent LSHFT ENTER>, <&caps_word>;
         };
     };
 
@@ -73,7 +135,7 @@
                 &q_tab_esc    &kp W         &kp F         &kp P         &kp G            &kp J         &kp L         &kp U         &kp Y         &kp MINUS
                 &hm LMETA A   &hm LALT S    &hm LCTRL R   &hm LSHFT T   &kp D            &kp H         &hm RSHFT N   &hm RCTRL E   &hm RALT O    &hm RMETA I
                 &kp Z         &kp X         &kp C         &kp V         &kp B            &kp K         &kp M         &kp COMMA     &kp DOT       &kp FSLH
-                &none         &none         &none         &ent_caps     &mo NUM          &lt NAV SPACE &lt FUNC BSPC &none         &none         &none
+                &none         &none         &none         &ent_sh_caps  &mo NUM          &lt NAV SPACE &lt FUNC BSPC &none         &none         &none
             >;
         };
 
@@ -83,7 +145,7 @@
                 &kp Q         &kp W         &kp E         &kp R         &kp T            &kp Y         &kp U         &kp I         &kp O         &kp P
                 &kp A         &kp S         &kp D         &kp F         &kp G            &kp H         &kp J         &kp K         &kp L         &kp SEMI
                 &kp Z         &kp X         &kp C         &kp V         &kp B            &kp N         &kp M         &kp COMMA     &kp DOT       &kp FSLH
-                &none         &none         &none         &ent_caps     &mo NUM          &lt NAV SPACE &lt FUNC BSPC &none         &none         &none
+                &none         &none         &none         &ent_sh_caps  &mo NUM          &lt NAV SPACE &lt FUNC BSPC &none         &none         &none
             >;
         };
 
@@ -93,11 +155,11 @@
                 &kp ESC       &kp Q         &kp W         &kp E         &kp R            &none         &none         &none         &none         &none
                 &kp LSHIFT    &kp A         &kp S         &kp D         &kp F            &none         &none         &none         &none         &none
                 &kp LCTRL     &kp Z         &kp X         &kp C         &kp V            &none         &none         &none         &none         &none
-                &none         &none         &none         &sl GAME_NUM  &kp SPACE        &mo NAV       &none         &none         &none         &none
+                &none         &none         &none         &sl GAME_NUM  &kp SPACE        &none         &none         &none         &none         &none
             >;
         };
 
-        /* Layer 3: Game Quick-Select Overlay */
+        /* Layer 3: Game Quick-Select Overlay (1, 2, 3, 4 + Utility) */
         game_num_layer {
             bindings = <
                 &kp GRAVE     &kp N4        &kp N5        &kp N6        &kp T            &none         &none         &none         &none         &none
@@ -111,8 +173,8 @@
         func_layer {
             bindings = <
                 &soft_off     &kp C_BRI_UP  &kp C_VOL_UP  &kp C_MUTE    &kp C_FF         &none         &kp LC(LS(TAB)) &kp LG(UP)   &kp LC(TAB)   &kp PSCRN
-                &macro_sleep  &kp C_BRI_DN  &kp C_VOL_DN  &kp C_PP      &kp C_RW         &none         &kp LG(LC(LEFT)) &kp LG(DOWN) &kp LG(LC(RIGHT)) &none
-                &to COLEMAK   &to QWERTY    &to GAME      &to MACRO_SEL  &none            &to NAV       &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_CLR
+                &none         &kp C_BRI_DN  &kp C_VOL_DN  &kp C_PP      &kp C_RW         &kp LA(F4)    &kp LG(LC(LEFT)) &kp LG(DOWN) &kp LG(LC(RIGHT)) &macro_sleep
+                &to COLEMAK   &to QWERTY    &to GAME      &to ART       &none            &to NAV       &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_CLR
                 &none         &none         &none         &trans        &trans           &trans        &trans        &none         &none         &none
             >;
         };
@@ -137,53 +199,23 @@
             >;
         };
 
-        /* Layer 7: Krita Starter Slate */
-        krita_layer {
+        /* Layer 7: Reserved Art / Macropad Layer (Left hand Drawing shortcuts) */
+        art_layer {
             bindings = <
-                &kp ESC       &none         &none         &none         &none            &none         &none         &none         &none         &none
-                &kp LCTRL     &kp B         &kp E         &kp L         &none            &none         &none         &none         &none         &none
-                &kp LSHIFT    &none         &none         &none         &none            &none         &none         &none         &none         &none
-                &none         &none         &none         &mo MACRO_SEL &mo ART_NAV      &none         &none         &none         &none         &none
+                &macro_lasso  &macro_eraser &macro_pen1   &macro_pen2   &none            &none         &none         &none         &none         &none
+                &kp Q         &kp E         &kp B         &kp G         &none            &none         &none         &none         &none         &none
+                &none         &none         &none         &none         &none            &none         &none         &none         &none         &none
+                &none         &none         &none         &kp LC(Z)     &mo ART_NAV      &none         &mo FUNC      &none         &none         &none
             >;
         };
 
-        /* Layer 8: OneNote Starter Slate */
-        onenote_layer {
+        /* Layer 8: Blank Expansion Layer */
+        blank_layer {
             bindings = <
-                &kp ESC       &none         &none         &none         &none            &none         &none         &none         &none         &none
-                &kp LCTRL     &kp P         &kp E         &kp L         &none            &none         &none         &none         &none         &none
-                &kp LSHIFT    &none         &none         &none         &none            &none         &none         &none         &none         &none
-                &none         &none         &none         &mo MACRO_SEL &mo ART_NAV      &none         &none         &none         &none         &none
-            >;
-        };
-
-        /* Layer 9: LibreSprite Starter Slate */
-        libresprite_layer {
-            bindings = <
-                &kp ESC       &none         &none         &none         &none            &none         &none         &none         &none         &none
-                &kp LCTRL     &kp B         &kp E         &kp L         &none            &none         &none         &none         &none         &none
-                &kp LSHIFT    &none         &none         &none         &none            &none         &none         &none         &none         &none
-                &none         &none         &none         &mo MACRO_SEL &mo ART_NAV      &none         &none         &none         &none         &none
-            >;
-        };
-
-        /* Layer 10: Right-Hand Control Panel / App Switcher */
-        MACRO_SEL_layer {
-            bindings = <
-                &none         &none         &none         &none         &none            &to COLEMAK   &to ART_KRITA &to ART_ONENOTE &to ART_LIBRE &none
-                &none         &none         &none         &none         &none            &to QWERTY    &none         &none           &none         &none
-                &none         &none         &none         &none         &none            &to GAME      &none         &none           &none         &none
-                &none         &none         &none         &trans        &none            &none         &none         &none           &none         &none
-            >;
-        };
-
-        /* Layer 11: Canvas Navigation & Zoom Overlay (Active across all art layers) */
-        art_nav_layer {
-            bindings = <
-                &none         &none         &kp UP        &none         &none            &none         &none         &none         &none         &none
-                &none         &kp LEFT      &kp DOWN      &kp RIGHT     &none            &none         &none         &none         &none         &none
-                &none         &none         &kp LC(MINUS) &kp LC(EQL)   &none            &none         &none         &none         &none         &none
-                &none         &none         &none         &trans        &none            &none         &none         &none         &none         &none
+                &none         &none         &msc SCRL_UP  &none         &none            &none         &none         &none         &none         &none
+                &none         &msc SCRL_LEFT &msc SCRL_DOWN &msc SCRL_RIGHT &none        &none         &none         &none         &none         &none
+                &none         &none         &none         &none         &none            &none         &none         &none         &none         &none
+                &none         &none         &none         &trans        &trans           &trans        &trans        &none         &none         &none
             >;
         };
     };
