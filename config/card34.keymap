@@ -178,7 +178,7 @@
         art_layer {
             bindings = <
                 &macro_lasso  &macro_eraser &macro_pen1   &macro_pen2   &none            &none         &none         &none         &none         &none
-                &kp Q         &kp E         &kp B         &kp G         &none            &none         &none         &none         &none         &none
+                &kp Q         &kp E         &kp B         &kp G         &kp I            &none         &none         &none         &none         &none
                 &none         &none         &none         &none         &none            &none         &none         &none         &none         &none
                 &none         &none         &none         &kp LC(Z)     &mo ART_NAV      &none         &to COLEMAK   &none         &none         &none
             >;
