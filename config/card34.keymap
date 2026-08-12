@@ -17,7 +17,6 @@
 #define NUM      6
 #define ART      7   
 #define ART_NAV  8   
-#define PANEL    9
 
 /* Mouse & Scroll Acceleration Adjustments */
 &msc {
@@ -197,26 +196,19 @@
                 &macro_lasso  &macro_eraser &macro_pen1   &macro_pen2   &none            &none         &none         &none         &none         &none
                 &kp Q         &kp E         &kp B         &kp G         &none            &none         &none         &none         &none         &none
                 &none         &none         &none         &none         &none            &none         &none         &none         &none         &none
-                &none         &none         &none         &kp LC(Z)     &mo ART_NAV      &none         &mo PANEL     &none         &none         &none
+                &none         &none         &none         &kp LC(Z)     &mo ART_NAV      &none         &none         &none         &none         &none
             >;
         };
 
         /* Layer 8: Blank Expansion Layer */
-        blank_layer {
+        art_nav_layer {
             bindings = <
                 &none         &none         &msc SCRL_UP  &none         &none            &none         &none         &none         &none         &none
                 &none         &msc SCRL_LEFT &msc SCRL_DOWN &msc SCRL_RIGHT &none        &none         &none         &none         &none         &none
                 &none         &none         &none         &none         &none            &none         &none         &none         &none         &none
-                &none         &none         &none         &trans        &trans           &trans        &trans        &none         &none         &none
+                &none         &none         &none         &to COLEMAK   &trans           &trans        &trans        &none         &none         &none
             >;
         };
-        panel_layer {
-            bindings = <
-                &trans        &trans        &trans        &trans        &trans           &trans        &trans        &trans        &trans        &trans        
-                &trans        &trans        &trans        &trans        &trans           &trans        &trans        &trans        &trans        &trans      
-                &to COLEMAK   &to QWERTY    &to GAME      &to ART       &none            &trans        &trans        &trans        &trans        &trans      
-                &none         &none         &none         &trans        &trans           &trans        &trans        &none         &none         &none
-            >;
-        };
+
     };
 };
