@@ -16,7 +16,8 @@
 #define NAV      5
 #define NUM      6
 #define ART      7   
-#define ART_NAV  8   /* Reserved for future expansion */
+#define ART_NAV  8   
+#define PANEL    9
 
 /* Mouse & Scroll Acceleration Adjustments */
 &msc {
@@ -85,7 +86,6 @@
             tap-ms = <30>;
             bindings =
                 <&kp LA(D)>,
-                <&kp G>,
                 <&kp L>;
         };
 
@@ -114,15 +114,7 @@
             tapping-term-ms = <200>;
             quick-tap-ms = <150>;
             flavor = "hold-preferred";
-            bindings = <&kp &kp>;
-        };
-
-        /* Tap-Dance: Single/Hold = Enter/Shift, Double Tap = Caps Word */
-        ent_sh_caps: enter_shift_caps_tapdance {
-            compatible = "zmk,behavior-tap-dance";
-            #binding-cells = <0>;
-            tapping-term-ms = <220>;
-            bindings = <&sh_ent LSHFT ENTER>, <&caps_word>;
+            bindings = <&kp LSHFT>, <&kp ENTER>;
         };
     };
 
@@ -135,7 +127,7 @@
                 &q_tab_esc    &kp W         &kp F         &kp P         &kp G            &kp J         &kp L         &kp U         &kp Y         &kp MINUS
                 &hm LMETA A   &hm LALT S    &hm LCTRL R   &hm LSHFT T   &kp D            &kp H         &hm RSHFT N   &hm RCTRL E   &hm RALT O    &hm RMETA I
                 &kp Z         &kp X         &kp C         &kp V         &kp B            &kp K         &kp M         &kp COMMA     &kp DOT       &kp FSLH
-                &none         &none         &none         &ent_sh_caps  &mo NUM          &lt NAV SPACE &lt FUNC BSPC &none         &none         &none
+                &none         &none         &none         &sh_ent       &mo NUM          &lt NAV SPACE &lt FUNC BSPC &none         &none         &none
             >;
         };
 
@@ -145,7 +137,7 @@
                 &kp Q         &kp W         &kp E         &kp R         &kp T            &kp Y         &kp U         &kp I         &kp O         &kp P
                 &kp A         &kp S         &kp D         &kp F         &kp G            &kp H         &kp J         &kp K         &kp L         &kp SEMI
                 &kp Z         &kp X         &kp C         &kp V         &kp B            &kp N         &kp M         &kp COMMA     &kp DOT       &kp FSLH
-                &none         &none         &none         &ent_sh_caps  &mo NUM          &lt NAV SPACE &lt FUNC BSPC &none         &none         &none
+                &none         &none         &none         &sh_ent       &mo NUM          &lt NAV SPACE &lt FUNC BSPC &none         &none         &none
             >;
         };
 
@@ -165,7 +157,7 @@
                 &kp GRAVE     &kp N4        &kp N5        &kp N6        &kp T            &none         &none         &none         &none         &none
                 &kp TAB       &kp N1        &kp N2        &kp N3        &kp G            &none         &none         &none         &none         &none
                 &trans        &trans        &trans        &trans        &kp B            &none         &none         &none         &none         &none
-                &none         &none         &none         &trans        &trans           &none         &none         &none         &none         &none
+                &none         &none         &none         &trans        &to COLEMAK      &none         &none         &none         &none         &none
             >;
         };
 
@@ -205,7 +197,7 @@
                 &macro_lasso  &macro_eraser &macro_pen1   &macro_pen2   &none            &none         &none         &none         &none         &none
                 &kp Q         &kp E         &kp B         &kp G         &none            &none         &none         &none         &none         &none
                 &none         &none         &none         &none         &none            &none         &none         &none         &none         &none
-                &none         &none         &none         &kp LC(Z)     &mo ART_NAV      &none         &mo FUNC      &none         &none         &none
+                &none         &none         &none         &kp LC(Z)     &mo ART_NAV      &none         &mo PANEL     &none         &none         &none
             >;
         };
 
@@ -218,5 +210,12 @@
                 &none         &none         &none         &trans        &trans           &trans        &trans        &none         &none         &none
             >;
         };
+        panel_layer {
+            bindings = <
+                &trans        &trans        &trans        &trans        &trans           &trans        &trans        &trans        &trans        &trans        
+                &trans        &trans        &trans        &trans        &trans           &trans        &trans        &trans        &trans        &trans      
+                &to COLEMAK   &to QWERTY    &to GAME      &to ART       &none            &trans        &trans        &trans        &trans        &trans      
+                &none         &none         &none         &trans        &trans           &trans        &trans        &none         &none         &none
+            >;};
     };
 };
