@@ -17,6 +17,7 @@
 #define NUM      6
 #define ART      7   
 #define ART_NAV  8   
+#define TENKEY   9   /* Right-hand 10-key Numpad activated via NUM + sh_ent */
 
 /* Mouse & Scroll Acceleration Adjustments */
 &msc {
@@ -134,7 +135,7 @@
             >;
         };
 
-        /* Layer 3: Game Quick-Select Overlay (1, 2, 3, 4 + Utility) */
+        /* Layer 3: Game Quick-Select Overlay */
         game_num_layer {
             bindings = <
                 &kp GRAVE     &kp N4        &kp N5        &kp N6        &kp T            &none         &none         &none         &none         &none
@@ -170,11 +171,11 @@
                 &kp EXCL      &kp DQT       &kp HASH      &kp DLLR      &kp PRCNT        &kp AMPS      &kp SQT       &kp LPAR      &kp RPAR      &kp PLUS
                 &hm LMETA N1  &hm LALT N2   &hm LCTRL N3  &hm LSHFT N4  &kp N5           &kp N6        &hm RSHFT N7  &hm RCTRL N8  &hm RALT N9   &hm RMETA N0
                 &kp GRAVE     &kp AT        &kp PIPE      &kp COLON     &kp BSLH         &kp EQUAL     &kp UNDER     &kp LBKT      &kp RBKT      &kp SEMI
-                &none         &none         &none         &trans        &trans           &trans        &trans        &none         &none         &none
+                &none         &none         &none         &mo TENKEY    &trans           &trans        &trans        &none         &none         &none
             >;
         };
 
-        /* Layer 7: Reserved Art / Macropad Layer (Left hand Drawing shortcuts) */
+        /* Layer 7: Reserved Art / Macropad Layer */
         art_layer {
             bindings = <
                 &macro_lasso  &macro_eraser &macro_pen1   &macro_pen2   &none            &none         &none         &none         &none         &none
@@ -191,6 +192,16 @@
                 &none         &msc SCRL_LEFT &msc SCRL_DOWN &msc SCRL_RIGHT &none        &none         &none         &none         &none         &none
                 &none         &none         &none         &none         &none            &none         &none         &none         &none         &none
                 &none         &none         &none         &to COLEMAK   &trans           &trans        &trans        &none         &none         &none
+            >;
+        };
+
+        /* Layer 9: Right-Hand 10-Key Numpad (Activated via NUM + sh_ent) */
+        tenkey_layer {
+            bindings = <
+                &kp ESC       &kp LPAR      &kp RPAR      &kp PRCNT     &kp TAB          &kp FSLH      &kp N7        &kp N8        &kp N9        &kp MINUS
+                &kp LSHFT     &kp LALT      &kp LCTRL     &kp LMETA     &kp BSPC         &kp ASTRK     &kp N4        &kp N5        &kp N6        &kp PLUS
+                &none         &kp COMMA     &kp COLON     &kp SEMI      &kp ENTER        &kp EQUAL     &kp N1        &kp N2        &kp N3        &kp BSPC
+                &none         &none         &none         &trans        &trans           &kp N0        &kp DOT       &none         &none         &none
             >;
         };
 
