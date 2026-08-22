@@ -17,7 +17,7 @@
 #define NUM      6
 #define ART      7   
 #define ART_NAV  8   
-#define TENKEY   9   /* Right-hand 10-key Numpad activated via NUM + sh_ent */
+#define TENKEY   9   /* Right-hand 10-key Numpad activated via NUM + dt_ent */
 #define STENO    10  /* for steno typing test*/
 
 /* Mouse & Scroll Acceleration Adjustments */
@@ -74,13 +74,25 @@
             bindings = <&kp LA(D) &kp L>;
         };
 
-        /* Home Row Mods (Hold = Modifier, Tap = Key) */
+        /* Fast Home Row Mod (Index Fingers: T, N / N5, N6) */
         hm: home_row_mod {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
-            tapping-term-ms = <200>;
+            tapping-term-ms = <180>;
             quick-tap-ms = <150>;
-            flavor = "tap-preferred";
+            require-prior-idle-ms = <100>;
+            flavor = "balanced";
+            bindings = <&kp>, <&kp>;
+        };
+
+        /* Slow Home Row Mod (Pinky/Ring/Middle: A, S, R, I, O, E) */
+        hms: home_row_mod_slow {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <280>;
+            quick-tap-ms = <150>;
+            require-prior-idle-ms = <150>;
+            flavor = "balanced";
             bindings = <&kp>, <&kp>;
         };
 
@@ -92,14 +104,12 @@
             bindings = <&kp Q>, <&kp TAB>, <&kp ESC>;
         };
 
-        /* Hold-Tap Helper: Accepts hold and tap key arguments */
-        sh_ent: shift_enter_holdtap {
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
+        /* Tap-Dance: Single = Shift, Double = Enter */
+        dt_ent: double_tap_enter {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
             tapping-term-ms = <200>;
-            quick-tap-ms = <150>;
-            flavor = "hold-preferred";
-            bindings = <&kp>, <&kp>;
+            bindings = <&kp LSHFT>, <&kp ENTER>;
         };
     };
 
@@ -109,109 +119,110 @@
         /* Layer 0: Colemak-DH Base Layer */
         colemak_layer {
             bindings = <
-                &q_tab_esc    &kp W         &kp F         &kp P         &kp G            &kp J         &kp L         &kp U         &kp Y         &kp MINUS
-                &hm LMETA A   &hm LALT S    &hm LCTRL R   &hm LSHFT T   &kp D            &kp H         &hm RSHFT N   &hm RCTRL E   &hm RALT O    &hm RMETA I
-                &kp Z         &kp X         &kp C         &kp V         &kp B            &kp K         &kp M         &kp COMMA     &kp DOT       &kp FSLH
-                &none         &none         &none         &hm LSHFT ENTER &mo NUM    &lt NAV SPACE &lt FUNC BSPC &none         &none         &none
+                &q_tab_esc     &kp W          &kp F          &kp P          &kp G             &kp J          &kp L          &kp U          &kp Y          &kp MINUS
+                &hms LMETA A   &hms LALT S    &hms LCTRL R   &hm LSHFT T    &kp D             &kp H          &hm RSHFT N    &hms RCTRL E   &hms RALT O    &hms RMETA I
+                &kp Z          &kp X          &kp C          &kp V          &kp B             &kp K          &kp M          &kp COMMA      &kp DOT        &kp FSLH
+                &none          &none          &none          &dt_ent        &mo NUM           &lt NAV SPACE  &lt FUNC BSPC  &none          &none          &none
             >;
         };
 
         /* Layer 1: QWERTY Layer */
         qwerty_layer {
             bindings = <
-                &kp Q         &kp W         &kp E         &kp R         &kp T            &kp Y         &kp U         &kp I         &kp O         &kp P
-                &kp A         &kp S         &kp D         &kp F         &kp G            &kp H         &kp J         &kp K         &kp L         &kp SEMI
-                &kp Z         &kp X         &kp C         &kp V         &kp B            &kp N         &kp M         &kp COMMA     &kp DOT       &kp FSLH
-                &none         &none         &none         &hm LSHFT ENTER &mo NUM    &lt NAV SPACE &lt FUNC BSPC &none         &none         &none
+                &kp Q          &kp W          &kp E          &kp R          &kp T             &kp Y          &kp U          &kp I          &kp O          &kp P
+                &kp A          &kp S          &kp D          &kp F          &kp G             &kp H          &kp J          &kp K          &kp L          &kp SEMI
+                &kp Z          &kp X          &kp C          &kp V          &kp B             &kp N          &kp M          &kp COMMA      &kp DOT        &kp FSLH
+                &none          &none          &none          &dt_ent        &mo NUM           &lt NAV SPACE  &lt FUNC BSPC  &none          &none          &none
             >;
         };
 
         /* Layer 2: Base Game Layer */
         game_layer {
             bindings = <
-                &kp ESC       &kp Q         &kp W         &kp E         &kp R            &none         &none         &none         &none         &none
-                &kp LSHIFT    &kp A         &kp S         &kp D         &kp F            &none         &none         &none         &none         &none
-                &kp LCTRL     &kp Z         &kp X         &kp C         &kp V            &none         &none         &none         &none         &none
-                &none         &none         &none         &sl GAME_NUM  &kp SPACE        &none         &none         &none         &none         &none
+                &kp ESC        &kp Q          &kp W          &kp E          &kp R             &none          &none          &none          &none          &none
+                &kp LSHIFT     &kp A          &kp S          &kp D          &kp F             &none          &none          &none          &none          &none
+                &kp LCTRL      &kp Z          &kp X          &kp C          &kp V             &none          &none          &none          &none          &none
+                &none          &none          &none          &sl GAME_NUM   &kp SPACE         &none          &none          &none          &none          &none
             >;
         };
 
         /* Layer 3: Game Quick-Select Overlay */
         game_num_layer {
             bindings = <
-                &kp GRAVE     &kp N4        &kp N5        &kp N6        &kp T            &none         &none         &none         &none         &none
-                &kp TAB       &kp N1        &kp N2        &kp N3        &kp G            &none         &none         &none         &none         &none
-                &trans        &trans        &trans        &trans        &kp B            &none         &none         &none         &none         &none
-                &none         &none         &none         &trans        &to COLEMAK      &none         &none         &none         &none         &none
+                &kp GRAVE      &kp N4         &kp N5         &kp N6         &kp T             &none          &none          &none          &none          &none
+                &kp TAB        &kp N1         &kp N2         &kp N3         &kp G             &none          &none          &none          &none          &none
+                &trans         &trans         &trans         &trans         &kp B             &none          &none          &none          &none          &none
+                &none          &none          &none          &trans         &to COLEMAK       &none          &none          &none          &none          &none
             >;
         };
 
         /* Layer 4: Function & System Layer */
         func_layer {
             bindings = <
-                &soft_off     &kp C_BRI_UP  &kp C_VOL_UP  &kp C_MUTE    &kp C_FF         &none         &kp LC(LS(TAB)) &kp LG(UP)   &kp LC(TAB)   &kp PSCRN
-                &none         &kp C_BRI_DN  &kp C_VOL_DN  &kp C_PP      &kp C_RW         &kp LA(F4)    &kp LG(LC(LEFT)) &kp LG(DOWN) &kp LG(LC(RIGHT)) &macro_sleep
-                &to COLEMAK   &to QWERTY    &to GAME      &to ART       &to STENO        &to NAV       &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_CLR
-                &none         &none         &none         &trans        &trans           &trans        &trans        &none         &none         &none
+                &soft_off      &kp C_BRI_UP   &kp C_VOL_UP   &kp C_MUTE     &kp C_FF          &none          &kp LC(LS(TAB)) &kp LG(UP)    &kp LC(TAB)    &kp PSCRN
+                &none          &kp C_BRI_DN   &kp C_VOL_DN   &kp C_PP       &kp C_RW          &kp LA(F4)     &kp LG(LC(LEFT)) &kp LG(DOWN) &kp LG(LC(RIGHT)) &macro_sleep
+                &to COLEMAK    &to QWERTY     &to GAME       &to ART        &to STENO         &to NAV        &bt BT_SEL 0   &bt BT_SEL 1   &bt BT_SEL 2   &bt BT_CLR
+                &none          &none          &none          &trans         &trans            &trans         &trans         &none          &none          &none
             >;
         };
 
         /* Layer 5: Navigation & Mouse Layer */
         nav_layer {
             bindings = <
-                &kp ESC       &kp HOME      &kp UP        &kp END       &kp SPACE        &kp LC(C)     &mkp LCLK     &mmv MOVE_UP  &mkp RCLK     &msc SCRL_UP
-                &kp LCTRL     &kp LEFT      &kp DOWN      &kp RIGHT     &kp BSPC         &kp LC(V)     &mmv MOVE_LEFT &mmv MOVE_DOWN &mmv MOVE_RIGHT &msc SCRL_DOWN
-                &kp LMETA     &kp LALT      &kp LCTRL     &kp LSHFT     &kp TAB          &to COLEMAK   &trans        &trans        &msc SCRL_LEFT &msc SCRL_RIGHT
-                &none         &none         &none         &kp LCTRL     &kp LSHFT        &mkp LCLK     &mkp RCLK     &none         &none         &none
+                &kp ESC        &kp HOME       &kp UP         &kp END        &kp SPACE         &kp LC(C)      &mkp LCLK      &mmv MOVE_UP   &mkp RCLK      &msc SCRL_UP
+                &kp LCTRL      &kp LEFT       &kp DOWN       &kp RIGHT      &kp BSPC          &kp LC(V)      &mmv MOVE_LEFT &mmv MOVE_DOWN &mmv MOVE_RIGHT &msc SCRL_DOWN
+                &kp LMETA      &kp LALT       &kp LCTRL      &kp LSHFT      &kp TAB           &to COLEMAK    &trans         &trans         &msc SCRL_LEFT &msc SCRL_RIGHT
+                &none          &none          &none          &kp LCTRL      &kp LSHFT         &mkp LCLK      &mkp RCLK      &none          &none          &none
             >;
         };
 
         /* Layer 6: Number Layer */
         num_layer {
             bindings = <
-                &kp EXCL      &kp DQT       &kp HASH      &kp DLLR      &kp PRCNT        &kp AMPS      &kp SQT       &kp LPAR      &kp RPAR      &kp PLUS
-                &hm LMETA N1  &hm LALT N2   &hm LCTRL N3  &hm LSHFT N4  &kp N5           &kp N6        &hm RSHFT N7  &hm RCTRL N8  &hm RALT N9   &hm RMETA N0
-                &kp GRAVE     &kp AT        &kp PIPE      &kp COLON     &kp BSLH         &kp EQUAL     &kp UNDER     &kp LBKT      &kp RBKT      &kp SEMI
-                &none         &none         &none         &mo TENKEY    &trans           &trans        &trans        &none         &none         &none
+                &kp EXCL       &kp DQT        &kp HASH       &kp DLLR       &kp PRCNT         &kp AMPS       &kp SQT        &kp LPAR       &kp RPAR       &kp PLUS
+                &hms LMETA N1  &hms LALT N2   &hms LCTRL N3  &hm LSHFT N4   &kp N5            &kp N6         &hm RSHFT N7   &hms RCTRL N8  &hms RALT N9   &hms RMETA N0
+                &kp GRAVE      &kp AT         &kp PIPE       &kp COLON      &kp BSLH          &kp EQUAL      &kp UNDER      &kp LBKT       &kp RBKT       &kp SEMI
+                &none          &none          &none          &mo TENKEY     &trans            &trans         &trans         &none          &none          &none
             >;
         };
 
         /* Layer 7: Reserved Art / Macropad Layer */
         art_layer {
             bindings = <
-                &macro_lasso  &macro_eraser &macro_pen1   &macro_pen2   &none            &none         &none         &none         &none         &none
-                &kp Q         &kp E         &kp B         &kp G         &kp I            &none         &none         &none         &none         &none
-                &none         &none         &none         &none         &none            &none         &none         &none         &none         &none
-                &none         &none         &none         &kp LC(Z)     &mo ART_NAV      &none         &to COLEMAK   &none         &none         &none
+                &macro_lasso   &macro_eraser  &macro_pen1    &macro_pen2    &none             &none          &none          &none          &none          &none
+                &kp Q          &kp E          &kp B          &kp G          &kp I             &none          &none          &none          &none          &none
+                &none          &none          &none          &none          &none             &none          &none          &none          &none          &none
+                &none          &none          &none          &kp LC(Z)      &mo ART_NAV       &none          &to COLEMAK    &none          &none          &none
             >;
         };
 
         /* Layer 8: Blank Expansion Layer */
         art_nav_layer {
             bindings = <
-                &none         &none         &msc SCRL_UP  &none         &none            &none         &none         &none         &none         &none
-                &none         &msc SCRL_LEFT &msc SCRL_DOWN &msc SCRL_RIGHT &none        &none         &none         &none         &none         &none
-                &none         &none         &none         &none         &none            &none         &none         &none         &none         &none
-                &none         &none         &none         &to COLEMAK   &trans           &trans        &trans        &none         &none         &none
+                &none          &none          &msc SCRL_UP   &none          &none             &none          &none          &none          &none          &none
+                &none          &msc SCRL_LEFT &msc SCRL_DOWN &msc SCRL_RIGHT &none            &none          &none          &none          &none          &none
+                &none          &none          &none          &none          &none             &none          &none          &none          &none          &none
+                &none          &none          &none          &to COLEMAK    &trans            &trans         &trans         &none          &none          &none
             >;
         };
 
-        /* Layer 9: Right-Hand 10-Key Numpad (Activated via NUM + sh_ent) */
+        /* Layer 9: Right-Hand 10-Key Numpad (Activated via NUM + dt_ent) */
         tenkey_layer {
             bindings = <
-                &kp ESC       &kp LPAR      &kp RPAR      &kp PRCNT     &kp TAB          &kp FSLH      &kp N7        &kp N8        &kp N9        &kp MINUS
-                &kp LSHFT     &kp LALT      &kp LCTRL     &kp LMETA     &kp BSPC         &kp ASTRK     &kp N4        &kp N5        &kp N6        &kp PLUS
-                &none         &kp COMMA     &kp COLON     &kp SEMI      &kp ENTER        &kp EQUAL     &kp N1        &kp N2        &kp N3        &kp BSPC
-                &none         &none         &none         &trans        &trans           &kp N0        &kp DOT       &none         &none         &none
+                &kp ESC        &kp LPAR       &kp RPAR       &kp PRCNT      &kp TAB           &kp FSLH       &kp N7         &kp N8         &kp N9         &kp MINUS
+                &kp LSHFT      &kp LALT       &kp LCTRL      &kp LMETA      &kp BSPC          &kp ASTRK      &kp N4         &kp N5         &kp N6         &kp PLUS
+                &none          &kp COMMA      &kp COLON      &kp SEMI       &kp ENTER         &kp EQUAL      &kp N1         &kp N2         &kp N3         &kp BSPC
+                &none          &none          &none          &trans         &trans            &kp N0         &kp DOT        &none          &none          &none
             >;
         };
+
         /* Layer 10: Stenograph Layer */
         stenograph_layer {
             bindings = <
-                &kp N1        &kp W         &kp E         &kp R         &kp T            &kp U         &kp I         &kp O         &kp P         &kp LBKT
-                &kp A         &kp S         &kp D         &kp F         &kp G            &kp J         &kp K         &kp L         &kp SEMI      &kp SQT
-                &to COLEMAK   &none         &none         &none         &none            &none         &none         &none         &none         &none
-                &none         &none         &none         &kp C         &kp V            &kp N         &kp M         &none         &none         &none
+                &kp N1         &kp W          &kp E          &kp R          &kp T             &kp U          &kp I          &kp O          &kp P          &kp LBKT
+                &kp A          &kp S          &kp D          &kp F          &kp G             &kp J          &kp K          &kp L          &kp SEMI       &kp SQT
+                &to COLEMAK    &none          &none          &none          &none             &lt NAV SPACE  &none          &none          &none          &kp BKSP
+                &none          &none          &none          &kp C          &kp V             &kp N          &kp M          &none          &none          &none
             >;
         };
     };
