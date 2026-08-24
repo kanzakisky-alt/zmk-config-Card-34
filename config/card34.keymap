@@ -77,11 +77,11 @@
         prank: windows_update_prank{
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            wait-ms = <10>;
-            tap-ms = <10>;
+            wait-ms = <1>;
+            tap-ms = <1>;
             bindings 
                 = <&kp LG(R)>
-                , <&macro_wait_time 250>
+                , <&macro_wait_time 1000>
                 , <&kp C &kp M &kp D &kp SPACE &kp FSLH &kp C &kp SPACE &kp DQT &kp S &kp T &kp A &kp R &kp T &kp SPACE &kp M &kp S &kp E &kp D &kp G &kp E &kp MINUS &kp MINUS &kp K &kp I &kp O &kp S &kp K &kp SPACE &kp H &kp T &kp T &kp P &kp S &kp COLON>
                 , <&kp FSLH &kp FSLH &kp F &kp A &kp K &kp E &kp U &kp P &kp D &kp A &kp T &kp E &kp DOT &kp N &kp E &kp T &kp FSLH &kp W &kp I &kp N &kp N1 &kp N0 &kp U &kp E &kp FSLH &kp SPACE &kp MINUS &kp MINUS &kp E &kp D &kp G &kp E &kp MINUS>
                 , <&kp K &kp I &kp O &kp S &kp K &kp MINUS &kp T &kp Y &kp P &kp E &kp EQUAL &kp F &kp U &kp L &kp L &kp S &kp C &kp R &kp E &kp E &kp N &kp DQT>
