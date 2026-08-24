@@ -6,7 +6,7 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/pointing.h>
 #include <dt-bindings/zmk/bt.h>
-#include <zmk-helpers/helper.h>
+
 
 // Clean Layer Index Definitions
 #define COLEMAK  0
