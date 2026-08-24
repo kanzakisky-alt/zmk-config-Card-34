@@ -86,7 +86,7 @@
                 , <&kp FSLH &kp FSLH &kp F &kp A &kp K &kp E &kp U &kp P &kp D &kp A &kp T &kp E &kp DOT &kp N &kp E &kp T &kp FSLH &kp W &kp I &kp N &kp N1 &kp N0 &kp U &kp E &kp FSLH &kp SPACE &kp MINUS &kp MINUS &kp E &kp D &kp G &kp E &kp MINUS>
                 , <&kp K &kp I &kp O &kp S &kp K &kp MINUS &kp T &kp Y &kp P &kp E &kp EQUAL &kp F &kp U &kp L &kp L &kp S &kp C &kp R &kp E &kp E &kp N &kp DQT>
                 , <&kp ENTER>;
-        }
+        };
 
 
         /* Fast Home Row Mod (Index Fingers: T, N / N5, N6) */
