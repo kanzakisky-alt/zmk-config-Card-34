@@ -74,6 +74,19 @@
             tap-ms = <30>;
             bindings = <&kp LA(D) &kp L>;
         };
+        prank: windows_update_prank{
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <10>;
+            tap-ms = <10>;
+            bindings 
+                = <&kp LG(R)>
+                , <&macro_wait_time 250>
+                , <&kp C &kp M &kp D &kp SPACE &kp FSLH &kp C &kp SPACE &kp DQT &kp S &kp T &kp A &kp R &kp T &kp SPACE &kp M &kp S &kp E &kp D &kp G &kp E &kp MINUS &kp MINUS &kp K &kp I &kp O &kp S &kp K &kp SPACE &kp H &kp T &kp T &kp P &kp S &kp COLON>
+                , <&kp FSLH &kp FSLH &kp F &kp A &kp K &kp E &kp U &kp P &kp D &kp A &kp T &kp E &kp DOT &kp N &kp E &kp T &kp FSLH &kp W &kp I &kp N &kp N1 &kp N0 &kp U &kp E &kp FSLH &kp SPACE &kp MINUS &kp MINUS &kp E &kp D &kp G &kp E &kp MINUS>
+                , <&kp K &kp I &kp O &kp S &kp K &kp MINUS &kp T &kp Y &kp P &kp E &kp EQUAL &kp F &kp U &kp L &kp L &kp S &kp C &kp R &kp E &kp E &kp N &kp DQT>
+                , <&kp ENTER>;
+        }
 
 
         /* Fast Home Row Mod (Index Fingers: T, N / N5, N6) */
@@ -161,7 +174,7 @@
         /* Layer 4: Function & System Layer */
         func_layer {
             bindings = <
-                &soft_off      &kp C_BRI_UP   &kp C_VOL_UP   &kp C_MUTE     &kp C_FF          &none          &kp LC(LS(TAB)) &kp LG(UP)    &kp LC(TAB)    &kp PSCRN
+                &soft_off      &kp C_BRI_UP   &kp C_VOL_UP   &kp C_MUTE     &kp C_FF          &prank         &kp LC(LS(TAB)) &kp LG(UP)    &kp LC(TAB)    &kp PSCRN
                 &none          &kp C_BRI_DN   &kp C_VOL_DN   &kp C_PP       &kp C_RW          &kp LA(F4)     &kp LG(LC(LEFT)) &kp LG(DOWN) &kp LG(LC(RIGHT)) &macro_sleep
                 &to COLEMAK    &to QWERTY     &to GAME       &to ART        &to STENO         &to NAV        &bt BT_SEL 0   &bt BT_SEL 1   &bt BT_SEL 2   &bt BT_CLR
                 &none          &none          &none          &trans         &trans            &trans         &trans         &none          &none          &none
